@@ -1,0 +1,2995 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor Profil Desa - Blogger Theme Builder</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #eff6ff;
+      --primary-dark: #1e3a8a;
+      --secondary: #0d9488;
+      --accent: #f59e0b;
+      --bg-panel: #ffffff;
+      --bg-body: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --border-radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --transition: all 0.2s ease-in-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* --- TOPBAR --- */
+    .topbar {
+      background-color: white;
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar-brand i {
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+
+    .topbar-title h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .topbar-title p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .topbar-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background-color: white;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background-color: #f1f5f9;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      background-color: #0f766e;
+    }
+
+    /* --- MAIN AREA CONTAINER --- */
+    .main-workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* --- LEFT SIDEBAR (FORM & TABS) --- */
+    .form-workspace {
+      width: 45%;
+      min-width: 500px;
+      background-color: var(--bg-panel);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .tab-navigator {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 16px;
+      gap: 6px;
+    }
+
+    .tab-btn {
+      padding: 6px 12px;
+      border: 1px solid #e2e8f0;
+      background-color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 20px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover {
+      background-color: #f1f5f9;
+      border-color: #cbd5e1;
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border-color: rgba(30, 64, 175, 0.2);
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(30, 64, 175, 0.05);
+    }
+
+    .form-container {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .form-tab-content {
+      display: none;
+    }
+
+    .form-tab-content.active {
+      display: block;
+    }
+
+    .form-group-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group.row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .form-group.triple {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      background-color: white;
+      transition: var(--transition);
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .card-editor-row {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background-color: #fafbfc;
+    }
+
+    /* --- RIGHT SIDEBAR (PREVIEW) --- */
+    .preview-workspace {
+      flex: 1;
+      background-color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+
+    .preview-header {
+      background-color: white;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .preview-modes {
+      display: flex;
+      gap: 10px;
+    }
+
+    .preview-mode-btn {
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+    }
+
+    .preview-mode-btn.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .iframe-wrapper {
+      flex: 1;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      transition: width 0.3s ease;
+    }
+
+    iframe.desktop {
+      width: 100%;
+    }
+
+    iframe.tablet {
+      width: 768px;
+    }
+
+    iframe.mobile {
+      width: 375px;
+    }
+
+    /* Hidden File Input */
+    #import-file-input {
+      display: none;
+    }
+
+    /* Alert Banner */
+    .alert-banner {
+      background-color: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 15px;
+      font-size: 0.78rem;
+      color: #065f46;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .alert-banner i {
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      <i class="fa-solid fa-hotel"></i>
+      <div class="topbar-title">
+        <h1>Editor Visual Profil Desa</h1>
+        <p>Blogger Theme Generator &amp; Live Data Hydrator</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn" onclick="triggerImportHTML()"><i class="fa-solid fa-file-code"></i> Impor HTML</button>
+      <button class="btn btn-secondary" onclick="exportJSON()"><i class="fa-solid fa-code"></i> Salin JSON</button>
+      <button class="btn btn-primary" style="background-color: var(--secondary); border-color: var(--secondary);"
+        onclick="exportHTML()"><i class="fa-solid fa-file-export"></i> Unduh Klasik (.HTML)</button>
+      <button class="btn btn-primary" style="background-color: #0284c7; border-color: #0284c7;" onclick="exportTXT()"><i
+          class="fa-solid fa-file-lines"></i> Unduh txt</button>
+      <button class="btn" style="color: #ef4444; border-color: #ef4444;" onclick="resetEditor()"><i
+          class="fa-solid fa-rotate-left"></i> Reset</button>
+    </div>
+  </div>
+
+  <input type="file" id="import-html-file-input" accept=".html" style="display:none"
+    onchange="handleImportHTMLFile(event)">
+
+  <!-- MAIN WORKSPACE -->
+  <div class="main-workspace">
+
+    <!-- FORM EDIT DATA (LEFT) -->
+    <div class="form-workspace">
+      <div class="tab-navigator">
+        <button class="tab-btn active" onclick="switchTab(event, 'tab-identitas')"><i class="fa-solid fa-id-card"></i>
+          Identitas</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-sejarah')"><i class="fa-solid fa-history"></i>
+          Sejarah</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-geografis')"><i class="fa-solid fa-globe"></i>
+          Geografis</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-demografi')"><i class="fa-solid fa-users"></i>
+          Demografi</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-pemerintahan')"><i class="fa-solid fa-sitemap"></i>
+          Pemerintah</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-potensi')"><i class="fa-solid fa-chart-line"></i>
+          Potensi</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-sosbud')"><i class="fa-solid fa-people-carry-box"></i>
+          Sosbud</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-infrastruktur')"><i class="fa-solid fa-road"></i>
+          Infrastruktur</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-pengangguran')"><i class="fa-solid fa-briefcase"></i>
+          Ketenagakerjaan</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-tema')"><i class="fa-solid fa-palette"></i>
+          Tema Warna</button>
+      </div>
+
+      <!-- ImgBB Upload Setup -->
+      <div class="imgbb-setup-panel" style="margin: 16px; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 11px; font-weight: 700; color: var(--text-main); display: inline-flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-cloud-arrow-up" style="color: var(--secondary);"></i> INTEGRASI UPLOADER IMGBB
+          </span>
+          <a href="https://api.imgbb.com/" target="_blank" style="font-size: 11px; color: #0284c7; text-decoration: underline; font-weight: 600;">Dapatkan API Key ↗</a>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <input type="password" id="imgbb-api-key" placeholder="Masukkan API Key ImgBB Anda di sini..." style="flex-grow: 1; padding: 8px 12px; font-size: 12px; border-radius: 8px; border: 1px solid #cbd5e1; outline: none;" oninput="saveImgbbKey()">
+          <button type="button" class="btn" style="padding: 6px 12px; font-size: 11px; margin: 0; background: #64748b; color: white; border-color: #64748b; display: flex; align-items: center; justify-content: center; height: 35px; width: 38px;" onclick="toggleKeyVisibility()">
+            <i class="fa-solid fa-eye" id="imgbb-key-eye"></i>
+          </button>
+        </div>
+        <p style="margin: 0; font-size: 10px; color: var(--text-muted); line-height: 1.4;">
+          *API Key bawaan sudah terisi otomatis. <strong>Jangan ubah API Key ini selama upload masih berhasil</strong>. Jika upload gagal (karena limit/kedaluwarsa), silakan klik <strong>Dapatkan API Key ↗</strong> untuk membuat API Key gratis baru di ImgBB dan tempel di sini.
+        </p>
+      </div>
+
+      <div class="form-container" id="form-fields">
+        <!-- 1. IDENTITAS DESA -->
+        <div class="form-tab-content active" id="tab-identitas">
+          <div class="form-group-title"><i class="fa-solid fa-id-card"></i> Identitas Desa</div>
+          <div class="form-group row">
+            <div>
+              <label for="namaDesa">Nama Desa</label>
+              <input type="text" id="namaDesa" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="motto">Slogan / Motto Desa</label>
+              <input type="text" id="motto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="kontakPhone">Nomor Kontak WhatsApp / Telp</label>
+            <input type="text" id="kontakPhone" oninput="updatePreview()" placeholder="Contoh: 0812-5072-1967">
+          </div>
+          <div class="form-group triple">
+            <div>
+              <label for="kecamatan">Kecamatan</label>
+              <input type="text" id="kecamatan" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="kabupaten">Kabupaten</label>
+              <input type="text" id="kabupaten" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="provinsi">Provinsi</label>
+              <input type="text" id="provinsi" oninput="updatePreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. SEJARAH -->
+        <div class="form-tab-content" id="tab-sejarah">
+          <div class="form-group-title"><i class="fa-solid fa-history"></i> Sejarah Desa</div>
+          <div class="form-group">
+            <label for="sej-asalUsul">Asal Usul Nama Desa</label>
+            <textarea id="sej-asalUsul" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sej-kondisiAwal">Kondisi Awal Desa</label>
+            <textarea id="sej-kondisiAwal" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sej-perkembangan">Perkembangan Desa</label>
+            <textarea id="sej-perkembangan" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sej-quote">Kutipan / Kisah Cerita Sejarah</label>
+            <textarea id="sej-quote" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-images"></i> Galeri Foto Sejarah
+          </div>
+          <div class="alert-banner">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Unggah gambar ke postingan Blogger Anda, lalu salin alamat URL gambarnya ke sini.</span>
+          </div>
+          <div class="form-group">
+            <label for="sej-gambar1">Link Gambar Utama (Landscape)</label>
+            <input type="text" id="sej-gambar1" oninput="updatePreview()">
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="sej-gambar2">Link Gambar Polaroid 1</label>
+              <input type="text" id="sej-gambar2" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="sej-gambar3">Link Gambar Polaroid 2</label>
+              <input type="text" id="sej-gambar3" oninput="updatePreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. GEOGRAFIS -->
+        <div class="form-tab-content" id="tab-geografis">
+          <div class="form-group-title"><i class="fa-solid fa-globe"></i> Geografis dan Wilayah</div>
+          <div class="form-group">
+            <label for="geo-letak">Letak Strategis</label>
+            <textarea id="geo-letak" oninput="updatePreview()"></textarea>
+          </div>
+
+          <label>Batas Wilayah</label>
+          <div class="form-group row">
+            <div>
+              <label for="geo-utara">Batas Utara</label>
+              <input type="text" id="geo-utara" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-timur">Batas Timur</label>
+              <input type="text" id="geo-timur" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="geo-selatan">Batas Selatan</label>
+              <input type="text" id="geo-selatan" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-barat">Batas Barat</label>
+              <input type="text" id="geo-barat" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group row" style="margin-top: 15px;">
+            <div>
+              <label for="geo-luas">Luas Wilayah Total (e.g. 1.234 Ha)</label>
+              <input type="text" id="geo-luas" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-peta">Peta Lokasi / URL Google Maps</label>
+              <input type="text" id="geo-peta" oninput="updatePreview()"
+                placeholder="Contoh: Kantor Desa Pasir Panjang Mempawah">
+              <p style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;line-height:1.4;">💡 Anda dapat menulis
+                langsung <strong>Nama Kantor Desa Kecamatan Kabupaten</strong> secara lengkap (misal: <em>Kantor Desa
+                  Penibung Kecamatan Mempawah Hilir Kabupaten Mempawah</em>)</p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div>
+              <label for="geo-topografi">Topografi</label>
+              <input type="text" id="geo-topografi" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-iklim">Iklim &amp; Curah Hujan</label>
+              <input type="text" id="geo-iklim" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div>
+              <label for="geo-ketinggian">Ketinggian Tempat (e.g. 15 mdpl)</label>
+              <input type="text" id="geo-ketinggian" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-bentangWilayah">Bentang Wilayah (e.g. Pesisir / Dataran Rendah)</label>
+              <input type="text" id="geo-bentangWilayah" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group triple">
+            <div>
+              <label for="geo-jarakKecamatan">Jarak ke Kec. (e.g. 5 Km)</label>
+              <input type="text" id="geo-jarakKecamatan" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-jarakKabupaten">Jarak ke Kab. (e.g. 12 Km)</label>
+              <input type="text" id="geo-jarakKabupaten" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-jarakProvinsi">Jarak ke Prov. (e.g. 80 Km)</label>
+              <input type="text" id="geo-jarakProvinsi" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-pie-chart"></i> Persentase Luas
+            Wilayah (%)</div>
+          <div class="form-group triple">
+            <div>
+              <label for="geo-p-permukiman">Permukiman (%)</label>
+              <input type="number" id="geo-p-permukiman" min="0" max="100" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-p-sawah">Sawah (%)</label>
+              <input type="number" id="geo-p-sawah" min="0" max="100" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-p-kebun">Kebun (%)</label>
+              <input type="number" id="geo-p-kebun" min="0" max="100" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="geo-p-hutan">Hutan (%)</label>
+              <input type="number" id="geo-p-hutan" min="0" max="100" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="geo-p-lainnya">Lainnya (%)</label>
+              <input type="number" id="geo-p-lainnya" min="0" max="100" oninput="updatePreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. DEMOGRAFI -->
+        <div class="form-tab-content" id="tab-demografi">
+          <div class="form-group-title"><i class="fa-solid fa-users"></i> Demografi Penduduk</div>
+          <div class="form-group row">
+            <div>
+              <label for="demo-total">Total Penduduk (Orang)</label>
+              <input type="text" id="demo-total" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="demo-kk">Kepala Keluarga (KK)</label>
+              <input type="text" id="demo-kk" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="demo-laki">Jumlah Laki-laki</label>
+              <input type="text" id="demo-laki" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="demo-perempuan">Jumlah Perempuan</label>
+              <input type="text" id="demo-perempuan" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="demo-quote">Slogan Kependudukan</label>
+            <textarea id="demo-quote" oninput="updatePreview()"></textarea>
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-chart-bar"></i> Struktur Umur
+            (%)</div>
+          <div class="form-group triple">
+            <div>
+              <label for="demo-u1">0 - 14 th (%)</label>
+              <input type="number" id="demo-u1" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="demo-u2">15 - 24 th (%)</label>
+              <input type="number" id="demo-u2" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="demo-u3">25 - 44 th (%)</label>
+              <input type="number" id="demo-u3" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="demo-u4">45 - 59 th (%)</label>
+              <input type="number" id="demo-u4" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="demo-u5">60+ th (%)</label>
+              <input type="number" id="demo-u5" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <!-- Mata Pencaharian moved to Ketenagakerjaan tab -->
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-graduation-cap"></i> Tingkat
+            Pendidikan (%)</div>
+          <div class="form-group triple">
+            <div>
+              <label for="demo-e1">Tidak Sekolah (%)</label>
+              <input type="number" id="demo-e1" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="demo-e2">SD / Sederajat (%)</label>
+              <input type="number" id="demo-e2" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="demo-e3">SMP / Sederajat (%)</label>
+              <input type="number" id="demo-e3" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="demo-e4">SMA / Sederajat (%)</label>
+              <input type="number" id="demo-e4" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="demo-e5">Sarjana / Diploma (%)</label>
+              <input type="number" id="demo-e5" oninput="updatePreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. PEMERINTAHAN -->
+        <div class="form-tab-content" id="tab-pemerintahan">
+          <div class="form-group-title"><i class="fa-solid fa-user-shield"></i> Profil Kepala Desa</div>
+          <div class="form-group triple">
+            <div>
+              <label for="pem-kadesNama">Nama Lengkap Kades</label>
+              <input type="text" id="pem-kadesNama" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-kadesStatus">Status Jabatan Kades</label>
+              <select id="pem-kadesStatus" onchange="updatePreview()">
+                <option value="Definitif">Definitif</option>
+                <option value="PJ">PJ (Penjabat)</option>
+                <option value="PLT">PLT (Pelaksana Tugas)</option>
+                <option value="PLH">PLH (Pelaksana Harian)</option>
+              </select>
+            </div>
+            <div>
+              <label for="pem-kadesMasaBakti">Masa Bakti (e.g. 2021 - 2027)</label>
+              <input type="text" id="pem-kadesMasaBakti" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pem-kadesFoto">URL Foto Kepala Desa</label>
+            <input type="text" id="pem-kadesFoto" oninput="updatePreview()">
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-danaDesaLabel">Label Dana Desa (e.g. Dana Desa 2024)</label>
+              <input type="text" id="pem-danaDesaLabel" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-danaDesaValue">Jumlah Dana Desa</label>
+              <input type="text" id="pem-danaDesaValue" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-sitemap"></i> Struktur Pemerintahan</div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-sekdes">Sekretaris Desa (Sekdes)</label>
+              <input type="text" id="pem-sekdes" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-sekdesFoto">URL Foto Sekdes</label>
+              <input type="text" id="pem-sekdesFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pem-kewilayahan">Bagian Kewilayahan (e.g. Kepala Dusun / RT / RW)</label>
+            <input type="text" id="pem-kewilayahan" oninput="updatePreview()">
+          </div>
+
+          <div class="form-group row">
+            <div>
+              <label for="pem-kasi-pem">Kasi Pemerintahan</label>
+              <input type="text" id="pem-kasi-pem" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-kasi-pemFoto">URL Foto Kasi Pemerintahan</label>
+              <input type="text" id="pem-kasi-pemFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-kasi-pel">Kasi Pelayanan</label>
+              <input type="text" id="pem-kasi-pel" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-kasi-pelFoto">URL Foto Kasi Pelayanan</label>
+              <input type="text" id="pem-kasi-pelFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-kasi-kesra">Kasi Kesejahteraan</label>
+              <input type="text" id="pem-kasi-kesra" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-kasi-kesraFoto">URL Foto Kasi Kesejahteraan</label>
+              <input type="text" id="pem-kasi-kesraFoto" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div>
+              <label for="pem-kaur-tu">Kaur TU dan Umum</label>
+              <input type="text" id="pem-kaur-tu" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-kaur-tuFoto">URL Foto Kaur TU dan Umum</label>
+              <input type="text" id="pem-kaur-tuFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-kaur-keu">Kaur Keuangan</label>
+              <input type="text" id="pem-kaur-keu" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-kaur-keuFoto">URL Foto Kaur Keuangan</label>
+              <input type="text" id="pem-kaur-keuFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-kaur-perc">Kaur Perencanaan</label>
+              <input type="text" id="pem-kaur-perc" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-kaur-percFoto">URL Foto Kaur Perencanaan</label>
+              <input type="text" id="pem-kaur-percFoto" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-users"></i> Staff Seksi &amp; Urusan</div>
+          
+          <div class="form-group row">
+            <div>
+              <label for="pem-staff-kasi-pem">Staff Kasi Pemerintahan</label>
+              <input type="text" id="pem-staff-kasi-pem" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-staff-kasi-pemFoto">URL Foto Staff Kasi Pem</label>
+              <input type="text" id="pem-staff-kasi-pemFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-staff-kasi-pel">Staff Kasi Pelayanan</label>
+              <input type="text" id="pem-staff-kasi-pel" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-staff-kasi-pelFoto">URL Foto Staff Kasi Pel</label>
+              <input type="text" id="pem-staff-kasi-pelFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-staff-kasi-kesra">Staff Kasi Kesejahteraan</label>
+              <input type="text" id="pem-staff-kasi-kesra" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-staff-kasi-kesraFoto">URL Foto Staff Kasi Kesra</label>
+              <input type="text" id="pem-staff-kasi-kesraFoto" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div>
+              <label for="pem-staff-kaur-tu">Staff Kaur TU &amp; Umum</label>
+              <input type="text" id="pem-staff-kaur-tu" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-staff-kaur-tuFoto">URL Foto Staff Kaur TU</label>
+              <input type="text" id="pem-staff-kaur-tuFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-staff-kaur-keu">Staff Kaur Keuangan</label>
+              <input type="text" id="pem-staff-kaur-keu" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-staff-kaur-keuFoto">URL Foto Staff Kaur Keu</label>
+              <input type="text" id="pem-staff-kaur-keuFoto" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="pem-staff-kaur-perc">Staff Kaur Perencanaan</label>
+              <input type="text" id="pem-staff-kaur-perc" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="pem-staff-kaur-percFoto">URL Foto Staff Kaur Perencanaan</label>
+              <input type="text" id="pem-staff-kaur-percFoto" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-map-location-dot"></i> Kepala
+            Dusun (Kadus)</div>
+          <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Sesuaikan nama wilayah/dusun dan
+            nama pejabat Kadus. Anda dapat menambah atau menghapus Kadus.</p>
+          <div id="kadus-dynamic-list">
+            <!-- Dynamic Kadus rows will be rendered here -->
+          </div>
+          <button type="button" class="btn"
+            style="margin-top: 10px; width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--primary-light); color: var(--primary); border-color: rgba(30, 64, 175, 0.2);"
+            onclick="addKadusRow()">
+            <i class="fa-solid fa-plus"></i> Tambah Kepala Dusun
+          </button>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-eye"></i> Visi &amp; Misi</div>
+          <div class="form-group">
+            <label for="pem-visi">Visi Desa</label>
+            <textarea id="pem-visi" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="pem-misi">Misi Desa (Tulis satu misi per baris)</label>
+            <textarea id="pem-misi" placeholder="Misi 1&#10;Misi 2&#10;Misi 3" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="pem-perdes">URL Dokumen Peraturan Desa (Link Download)</label>
+            <input type="text" id="pem-perdes" oninput="updatePreview()">
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-chart-pie"></i> Transparansi &amp; Media Sosial</div>
+          <div class="form-group">
+            <label for="pem-apbdesFoto">URL Gambar Baleho APBDes (Banner Transparansi)</label>
+            <input type="text" id="pem-apbdesFoto" oninput="updatePreview()" placeholder="Unggah gambar Baleho APBDes...">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label for="pem-email">Email Resmi Desa</label>
+              <input type="text" id="pem-email" oninput="updatePreview()" placeholder="desaku@gmail.com">
+            </div>
+            <div class="form-group">
+              <label for="pem-facebook">Facebook Desa</label>
+              <input type="text" id="pem-facebook" oninput="updatePreview()" placeholder="Nama akun Facebook...">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label for="pem-instagram">Instagram Desa</label>
+              <input type="text" id="pem-instagram" oninput="updatePreview()" placeholder="@desaku">
+            </div>
+            <div class="form-group">
+              <label for="pem-tiktok">TikTok Desa</label>
+              <input type="text" id="pem-tiktok" oninput="updatePreview()" placeholder="@desaku">
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. POTENSI -->
+        <div class="form-tab-content" id="tab-potensi">
+          <div class="form-group-title"><i class="fa-solid fa-coins"></i> Potensi Ekonomi</div>
+          <div id="potensi-ekonomi-list">
+            <!-- Dynamic list -->
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-umbrella-beach"></i> Potensi
+            Wisata</div>
+          <div id="potensi-wisata-list">
+            <!-- Dynamic list -->
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-leaf"></i> Sumber Daya Alam
+            (SDA)</div>
+          <div id="potensi-sda-list">
+            <!-- Dynamic list -->
+          </div>
+        </div>
+
+        <!-- 7. SOSBUD -->
+        <div class="form-tab-content" id="tab-sosbud">
+          <div class="form-group-title"><i class="fa-solid fa-people-carry-box"></i> Sosial dan Budaya</div>
+          <div class="form-group">
+            <label for="sb-adat">Adat Istiadat &amp; Tradisi</label>
+            <textarea id="sb-adat" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sb-bahasa">Bahasa Daerah</label>
+            <textarea id="sb-bahasa" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sb-kesenian">Kesenian Daerah</label>
+            <textarea id="sb-kesenian" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sb-agama">Agama &amp; Kepercayaan</label>
+            <textarea id="sb-agama" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sb-lembaga">Lembaga Kemasyarakatan</label>
+            <textarea id="sb-lembaga" oninput="updatePreview()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sb-gambar">URL Gambar Kegiatan Sosial/Budaya</label>
+            <input type="text" id="sb-gambar" oninput="updatePreview()">
+          </div>
+        </div>
+
+        <!-- 8. INFRASTRUKTUR -->
+        <div class="form-tab-content" id="tab-infrastruktur">
+          <div class="form-group-title"><i class="fa-solid fa-road"></i> Infrastruktur &amp; Fasilitas Umum</div>
+          
+          <!-- 1. Pendidikan -->
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--primary); font-size:0.82rem; margin-bottom:8px; display:block;">🏫 Fasilitas Pendidikan</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <div>
+                <label for="inf-count-didik">Status Singkat (e.g. Lengkap, 3 Sekolah)</label>
+                <input type="text" id="inf-count-didik" placeholder="e.g. Lengkap" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="inf-didik">Keterangan / Detail Fasilitas</label>
+                <input type="text" id="inf-didik" placeholder="e.g. SD/MI &amp; SMP/MTs" oninput="updatePreview()">
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Kesehatan -->
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--primary); font-size:0.82rem; margin-bottom:8px; display:block;">🏥 Fasilitas Kesehatan</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <div>
+                <label for="inf-count-sehat">Status Singkat (e.g. Ada, 2 Unit)</label>
+                <input type="text" id="inf-count-sehat" placeholder="e.g. Ada" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="inf-sehat">Keterangan / Detail Fasilitas</label>
+                <input type="text" id="inf-sehat" placeholder="e.g. Poskesdes/Polindes" oninput="updatePreview()">
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Ambulans Desa -->
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--primary); font-size:0.82rem; margin-bottom:8px; display:block;">🚑 Ambulans Desa</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <div>
+                <label for="inf-count-amb">Status Singkat (e.g. Ada, 1 Unit)</label>
+                <input type="text" id="inf-count-amb" placeholder="e.g. Ada" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="inf-txt-amb">Keterangan / Detail Fasilitas</label>
+                <input type="text" id="inf-txt-amb" placeholder="e.g. Siaga 24 Jam" oninput="updatePreview()">
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Fasilitas Ibadah -->
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--primary); font-size:0.82rem; margin-bottom:8px; display:block;">🕌 Fasilitas Ibadah</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <div>
+                <label for="inf-count-ibadah">Status Singkat (e.g. Lengkap, 5 Tempat)</label>
+                <input type="text" id="inf-count-ibadah" placeholder="e.g. Lengkap" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="inf-ibadah">Keterangan / Detail Fasilitas</label>
+                <input type="text" id="inf-ibadah" placeholder="e.g. Masjid &amp; Surau" oninput="updatePreview()">
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Akses Air Bersih -->
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--primary); font-size:0.82rem; margin-bottom:8px; display:block;">🚰 Akses Air Bersih</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <div>
+                <label for="inf-count-air">Status Singkat (e.g. Cukup, 90%)</label>
+                <input type="text" id="inf-count-air" placeholder="e.g. Cukup" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="inf-air">Keterangan / Detail Akses</label>
+                <input type="text" id="inf-air" placeholder="e.g. Sumur Gali &amp; Tadah Hujan" oninput="updatePreview()">
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Jaringan Listrik -->
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--primary); font-size:0.82rem; margin-bottom:8px; display:block;">⚡ Jaringan Listrik</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <div>
+                <label for="inf-count-listrik">Status Singkat (e.g. 100%, PLN)</label>
+                <input type="text" id="inf-count-listrik" placeholder="e.g. 100%" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="inf-listrik">Keterangan / Detail Listrik</label>
+                <input type="text" id="inf-listrik" placeholder="e.g. PLN 24 Jam" oninput="updatePreview()">
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Jalan & Jembatan -->
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--primary); font-size:0.82rem; margin-bottom:8px; display:block;">🛣️ Jalan &amp; Jembatan</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <div>
+                <label for="inf-count-jalan">Status Singkat (e.g. Baik, 80% Aspal)</label>
+                <input type="text" id="inf-count-jalan" placeholder="e.g. Baik" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="inf-jalan">Keterangan / Detail Kondisi</label>
+                <input type="text" id="inf-jalan" placeholder="e.g. Jalan Poros Beraspal Baik" oninput="updatePreview()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. PENGANGGURAN (KETENAGAKERJAAN) -->
+        <div class="form-tab-content" id="tab-pengangguran">
+          <div class="form-group-title"><i class="fa-solid fa-briefcase"></i> Ketenagakerjaan &amp; Mata Pencaharian</div>
+          
+          <div class="card-editor-row" style="background-color: #f0fdf4; border-color: #bbf7d0;">
+            <label style="font-weight:800; color:#16a34a; font-size:0.82rem; margin-bottom:12px; display:block;">🌾 Persentase Mata Pencaharian Penduduk (%)</label>
+            
+            <div class="form-group triple">
+              <div>
+                <label for="demo-m-petani">Petani (%)</label>
+                <input type="number" id="demo-m-petani" min="0" max="100" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="demo-m-nelayan">Nelayan (%)</label>
+                <input type="number" id="demo-m-nelayan" min="0" max="100" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="demo-m-wiraswasta">Wiraswasta (%)</label>
+                <input type="number" id="demo-m-wiraswasta" min="0" max="100" oninput="updatePreview()">
+              </div>
+            </div>
+            <div class="form-group triple">
+              <div>
+                <label for="demo-m-pedagang">Pedagang (%)</label>
+                <input type="number" id="demo-m-pedagang" min="0" max="100" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="demo-m-buruh">Buruh/Swasta (%)</label>
+                <input type="number" id="demo-m-buruh" min="0" max="100" oninput="updatePreview()">
+              </div>
+              <div>
+                <label for="demo-m-pegawai">PNS/TNI/Polri (%)</label>
+                <input type="number" id="demo-m-pegawai" min="0" max="100" oninput="updatePreview()">
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="demo-m-lainnya">Lainnya (%)</label>
+              <input type="number" id="demo-m-lainnya" min="0" max="100" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group-title" style="margin-top: 25px;"><i class="fa-solid fa-user-slash"></i> Pengangguran Usia Kerja</div>
+          <div class="form-group">
+            <label for="peng-total">Total Pengangguran Usia Kerja (e.g. 78 Orang)</label>
+            <input type="text" id="peng-total" oninput="updatePreview()">
+          </div>
+
+          <div class="form-group-title" style="margin-top: 20px;"><i class="fa-solid fa-venus-mars"></i> Pembagian Jenis
+            Kelamin</div>
+          <div class="form-group row">
+            <div>
+              <label for="peng-laki-c">Laki-laki (Orang)</label>
+              <input type="number" id="peng-laki-c" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="peng-laki-p">Laki-laki (%)</label>
+              <input type="number" step="0.1" id="peng-laki-p" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <label for="peng-pr-c">Perempuan (Orang)</label>
+              <input type="number" id="peng-pr-c" oninput="updatePreview()">
+            </div>
+            <div>
+              <label for="peng-pr-p">Perempuan (%)</label>
+              <input type="number" step="0.1" id="peng-pr-p" oninput="updatePreview()">
+            </div>
+          </div>
+
+          <div class="form-group-title" style="margin-top: 20px;"><i class="fa-solid fa-graduation-cap"></i> Pendidikan
+            Penganggur</div>
+          <div class="card-editor-row">
+            <label>1. Tidak Sekolah</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <input type="number" id="peng-ed1-c" placeholder="Orang" oninput="updatePreview()">
+              <input type="number" step="0.1" id="peng-ed1-p" placeholder="%" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="card-editor-row">
+            <label>2. SD / Sederajat</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <input type="number" id="peng-ed2-c" placeholder="Orang" oninput="updatePreview()">
+              <input type="number" step="0.1" id="peng-ed2-p" placeholder="%" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="card-editor-row">
+            <label>3. SMP / Sederajat</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <input type="number" id="peng-ed3-c" placeholder="Orang" oninput="updatePreview()">
+              <input type="number" step="0.1" id="peng-ed3-p" placeholder="%" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="card-editor-row">
+            <label>4. SMA / Sederajat</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <input type="number" id="peng-ed4-c" placeholder="Orang" oninput="updatePreview()">
+              <input type="number" step="0.1" id="peng-ed4-p" placeholder="%" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="card-editor-row">
+            <label>5. Diploma / S1</label>
+            <div class="form-group row" style="margin-bottom:0;">
+              <input type="number" id="peng-ed5-c" placeholder="Orang" oninput="updatePreview()">
+              <input type="number" step="0.1" id="peng-ed5-p" placeholder="%" oninput="updatePreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. TEMA WARNA -->
+        <div class="form-tab-content" id="tab-tema">
+          <div class="form-group-title"><i class="fa-solid fa-palette"></i> Tema Warna Website</div>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4;">
+            Pilih warna tema untuk website profil desa Anda. Preset di bawah ini adalah langkah awal, Anda bebas memodifikasi setiap warna menggunakan kode Hex maupun RGB di menu bawahnya agar tiap desa memiliki ciri khas unik.
+          </p>
+          <div class="form-group">
+            <label for="themePreset">Pilihan Preset Warna</label>
+            <select id="themePreset" onchange="handleThemeChange()">
+              <option value="green">Hijau Alami (Default - Penibung)</option>
+              <option value="blue">Biru Bahari (Ocean Blue)</option>
+              <option value="red">Merah Berani (Crimson Red)</option>
+              <option value="teal">Teal Tropis (Tropical Teal)</option>
+              <option value="orange">Jingga Hangat (Warm Orange)</option>
+              <option value="purple">Ungu Kencana (Royal Purple)</option>
+              <option value="amber">Kuning Emas (Golden Amber)</option>
+              <option value="slate">Abu Elegan (Elegant Slate)</option>
+              <option value="custom">Kustom (Pilih Warna Sendiri)</option>
+            </select>
+          </div>
+
+          <div class="card-editor-row" id="theme-colors-panel" style="border: 1px solid var(--border-color); background: #fafbfc; border-radius: var(--border-radius); padding: 16px; margin-top: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <label style="font-weight: 800; color: var(--primary-dark); display: block; margin-bottom: 12px; font-size: 0.85rem; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">🎨 Pengaturan Detail Warna (RGB / Hex)</label>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+              <!-- 1. Primary & 2. Secondary -->
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="flex: 1;">
+                  <label style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 4px;">Warna Utama (Primary)</label>
+                  <div style="display: flex; gap: 6px;">
+                    <input type="color" id="themePri" value="#00713d" style="width: 40px; height: 36px; border-radius: 6px; cursor: pointer; padding: 0; border: 1px solid var(--border-color);" oninput="syncColorPicker('themePri', 'themePriText')">
+                    <input type="text" id="themePriText" value="#00713D" style="flex: 1; padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border-color);" oninput="syncColorText('themePri', 'themePriText')" placeholder="#hex / rgb...">
+                  </div>
+                </div>
+                <div style="flex: 1;">
+                  <label style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 4px;">Warna Aksen (Secondary)</label>
+                  <div style="display: flex; gap: 6px;">
+                    <input type="color" id="themePri2" value="#009955" style="width: 40px; height: 36px; border-radius: 6px; cursor: pointer; padding: 0; border: 1px solid var(--border-color);" oninput="syncColorPicker('themePri2', 'themePri2Text')">
+                    <input type="text" id="themePri2Text" value="#009955" style="flex: 1; padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border-color);" oninput="syncColorText('themePri2', 'themePri2Text')" placeholder="#hex / rgb...">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Ink & 4. Dark -->
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="flex: 1;">
+                  <label style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 4px;">Warna Tulisan Gelap (Ink)</label>
+                  <div style="display: flex; gap: 6px;">
+                    <input type="color" id="themeInk" value="#004022" style="width: 40px; height: 36px; border-radius: 6px; cursor: pointer; padding: 0; border: 1px solid var(--border-color);" oninput="syncColorPicker('themeInk', 'themeInkText')">
+                    <input type="text" id="themeInkText" value="#004022" style="flex: 1; padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border-color);" oninput="syncColorText('themeInk', 'themeInkText')" placeholder="#hex / rgb...">
+                  </div>
+                </div>
+                <div style="flex: 1;">
+                  <label style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 4px;">Latar Belakang Gelap (Dark)</label>
+                  <div style="display: flex; gap: 6px;">
+                    <input type="color" id="themeDk" value="#002b17" style="width: 40px; height: 36px; border-radius: 6px; cursor: pointer; padding: 0; border: 1px solid var(--border-color);" oninput="syncColorPicker('themeDk', 'themeDkText')">
+                    <input type="text" id="themeDkText" value="#002b17" style="flex: 1; padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border-color);" oninput="syncColorText('themeDk', 'themeDkText')" placeholder="#hex / rgb...">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Background & 6. Primary Light -->
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="flex: 1;">
+                  <label style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 4px;">Latar Halaman (Background)</label>
+                  <div style="display: flex; gap: 6px;">
+                    <input type="color" id="themeBg" value="#f4f9f6" style="width: 40px; height: 36px; border-radius: 6px; cursor: pointer; padding: 0; border: 1px solid var(--border-color);" oninput="syncColorPicker('themeBg', 'themeBgText')">
+                    <input type="text" id="themeBgText" value="#f4f9f6" style="flex: 1; padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border-color);" oninput="syncColorText('themeBg', 'themeBgText')" placeholder="#hex / rgb...">
+                  </div>
+                </div>
+                <div style="flex: 1;">
+                  <label style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 4px;">Latar Terang (Light Tint)</label>
+                  <div style="display: flex; gap: 6px;">
+                    <input type="color" id="themeLight" value="#e9f7ef" style="width: 40px; height: 36px; border-radius: 6px; cursor: pointer; padding: 0; border: 1px solid var(--border-color);" oninput="syncColorPicker('themeLight', 'themeLightText')">
+                    <input type="text" id="themeLightText" value="#e9f7ef" style="flex: 1; padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border-color);" oninput="syncColorText('themeLight', 'themeLightText')" placeholder="#hex / rgb...">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7. Border Color -->
+              <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px; border-top: 1px dashed var(--border-color); padding-top: 12px;">
+                <div style="width: 50%;">
+                  <label style="font-size: 11px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 4px;">Garis Batas (Border)</label>
+                  <div style="display: flex; gap: 6px;">
+                    <input type="color" id="themeBorder" value="#a9dfbf" style="width: 40px; height: 36px; border-radius: 6px; cursor: pointer; padding: 0; border: 1px solid var(--border-color);" oninput="syncColorPicker('themeBorder', 'themeBorderText')">
+                    <input type="text" id="themeBorderText" value="#a9dfbf" style="flex: 1; padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border-color);" oninput="syncColorText('themeBorder', 'themeBorderText')" placeholder="#hex / rgb...">
+                  </div>
+                </div>
+                <div style="width: 50%; display: flex; align-items: flex-end; justify-content: flex-end; height: 100%;">
+                  <button type="button" class="btn" style="padding: 8px 12px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; gap: 6px; background: var(--primary-light); color: var(--primary); border: 1px solid rgba(30, 64, 175, 0.2); transition: var(--transition);" onclick="autoCalculateShades()" title="Hitung ulang warna turunan secara otomatis berdasarkan Warna Utama">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Generate
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE PREVIEW AREA (RIGHT) -->
+    <div class="preview-workspace">
+      <div class="preview-header">
+        <span>PRATINJAU LANGSUNG (LIVE PREVIEW)</span>
+        <div class="preview-modes">
+          <button class="preview-mode-btn active" onclick="setPreviewMode('desktop')"><i
+              class="fa-solid fa-desktop"></i> Desktop</button>
+          <button class="preview-mode-btn" onclick="setPreviewMode('tablet')"><i
+              class="fa-solid fa-tablet-screen-button"></i> Tablet</button>
+          <button class="preview-mode-btn" onclick="setPreviewMode('mobile')"><i
+              class="fa-solid fa-mobile-screen-button"></i> Mobile</button>
+        </div>
+      </div>
+      <div class="iframe-wrapper">
+        <iframe id="preview-iframe" class="desktop" src="about:blank"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- XML TEMPLATE CONTENT CONTAINER FOR COMPILATION -->
+  <script type="text/javascript">
+    // Global variables to store live preview scroll position
+    let previewScrollX = 0;
+    let previewScrollY = 0;
+
+    // Color Presets Definition
+    const colorPresets = {
+      green: { pri: "#00713d", pri2: "#009955", ink: "#004022", dk: "#002b17", bg: "#f4f9f6", primaryLight: "#e9f7ef", borderColor: "#a9dfbf" },
+      blue: { pri: "#1e40af", pri2: "#3b82f6", ink: "#1e3a8a", dk: "#172554", bg: "#f0f5ff", primaryLight: "#eff6ff", borderColor: "#bfdbfe" },
+      red: { pri: "#991b1b", pri2: "#dc2626", ink: "#7f1d1d", dk: "#450a0a", bg: "#fef2f2", primaryLight: "#fee2e2", borderColor: "#fecaca" },
+      teal: { pri: "#0f766e", pri2: "#0d9488", ink: "#115e59", dk: "#134e4a", bg: "#f0fdfa", primaryLight: "#ccfbf1", borderColor: "#99f6e4" },
+      orange: { pri: "#c2410c", pri2: "#ea580c", ink: "#9a3412", dk: "#7c2d12", bg: "#fff7ed", primaryLight: "#ffedd5", borderColor: "#fed7aa" },
+      purple: { pri: "#6d28d9", pri2: "#8b5cf6", ink: "#5b21b6", dk: "#4c1d95", bg: "#faf5ff", primaryLight: "#f3e8ff", borderColor: "#e9d5ff" },
+      amber: { pri: "#b45309", pri2: "#d97706", ink: "#92400e", dk: "#78350f", bg: "#fffbeb", primaryLight: "#fef3c7", borderColor: "#fde68a" },
+      slate: { pri: "#334155", pri2: "#475569", ink: "#1e293b", dk: "#0f172a", bg: "#f8fafc", primaryLight: "#f1f5f9", borderColor: "#e2e8f0" }
+    };
+
+    // Color conversion helper functions
+    function hexToHsl(hex) {
+      let r = parseInt(hex.slice(1, 3), 16) / 255;
+      let g = parseInt(hex.slice(3, 5), 16) / 255;
+      let b = parseInt(hex.slice(5, 7), 16) / 255;
+      let max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+      if (max === min) {
+        h = s = 0;
+      } else {
+        let d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+      }
+      return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+      };
+    }
+
+    function hslToHex(h, s, l) {
+      l /= 100;
+      const a = s * Math.min(l, 1 - l) / 100;
+      const f = n => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');
+      };
+      return `#${f(0)}${f(8)}${f(4)}`;
+    }
+
+    function updateStaticColors(templateText, configData) {
+      if (!configData.theme) return templateText;
+      const theme = configData.theme;
+      const rootRegex = /:root\s*\{([\s\S]*?)\}/;
+      const newRootContent = `
+        --pri: ${theme.pri};
+        --pri2: ${theme.pri2};
+        --ink: ${theme.ink};
+        --dk: ${theme.dk};
+        --bg: ${theme.bg};
+        /* Aliases for blog layout compatibility */
+        --primary: ${theme.pri};
+        --primary-light: ${theme.primaryLight};
+        --primary-dark: ${theme.ink};
+        --secondary: ${theme.pri2};
+        --border-color: ${theme.borderColor};
+        --bg-card: #ffffff;
+        --bg-main: ${theme.bg};
+        --text-main: #333333;
+        --text-muted: #64748b;
+        --border-radius-lg: 14px;
+        --border-radius-md: 10px;
+        --shadow-sm: 0 2px 6px rgba(0, 0, 0, .1);
+        --shadow-md: 0 2px 12px rgba(0, 0, 0, .09);
+        --shadow-lg: 0 6px 16px rgba(0, 0, 0, .12);
+        --transition: all 0.25s ease;
+      `;
+      return templateText.replace(rootRegex, `:root {` + newRootContent + `}`);
+    }
+
+    // Mock Default Data (based on theme_template.xml defaults)
+    const currentData = {
+      namaDesa: "Desa Maju",
+      kontakPhone: "0812-5072-1967",
+      kecamatan: "Suka Maju",
+      kabupaten: "Indah Makmur",
+      provinsi: "Indonesia",
+      motto: "Desa Maju, Masyarakat Sejahtera, Indonesia Jaya",
+      theme: {
+        type: "preset",
+        name: "green",
+        pri: "#00713d",
+        pri2: "#009955",
+        ink: "#004022",
+        dk: "#002b17",
+        bg: "#f4f9f6",
+        primaryLight: "#e9f7ef",
+        borderColor: "#a9dfbf"
+      },
+      sejarah: {
+        asalUsul: "Nama Desa Maju diambil dari harapan para pendiri desa agar desa ini senantiasa melangkah maju dalam segala bidang pembangunan dan kesejahteraan masyarakatnya.",
+        kondisiAwal: "Awalnya desa ini berupa kawasan hutan belantara yang kemudian dibuka oleh sekelompok transmigran pada tahun 1952 secara gotong royong.",
+        perkembangan: "Desa mengalami perkembangan pesat sejak masuknya infrastruktur listrik dan jalan aspal, serta berkembangnya sektor pertanian modern.",
+        quote: "Desa kami berdiri sejak tahun 1952. Konon katanya, nama desa ini diambil dari cita-cita luhur para sesepuh yang menginginkan kemajuan berkelanjutan dan kesejahteraan bagi seluruh anak cucu mereka.",
+        gambar1: "https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8?auto=format&fit=crop&w=600&q=80",
+        gambar2: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=300&q=80",
+        gambar3: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=300&q=80"
+      },
+      geografis: {
+        letakStrategis: "Terletak 5 KM dari pusat Kecamatan Suka Maju, 25 KM dari ibukota Kabupaten Indah Makmur, dan 90 KM dari ibukota Provinsi.",
+        batasUtara: "Desa Sukamaju",
+        batasTimur: "Hutan Lindung",
+        batasSelatan: "Samudra Hindia",
+        batasBarat: "Desa Pasir Indah",
+        luasTotal: "1.234 Ha",
+        ketinggian: "2 mdpl",
+        bentangWilayah: "Pesisir / Dataran Rendah",
+        jarakKecamatan: "5 Km",
+        jarakKabupaten: "12 Km",
+        jarakProvinsi: "80 Km",
+        luasDetail: [
+          { label: "Permukiman", value: 20, color: "#f59e0b" },
+          { label: "Sawah", value: 40, color: "#10b981" },
+          { label: "Kebun", value: 25, color: "#84cc16" },
+          { label: "Hutan", value: 10, color: "#065f46" },
+          { label: "Lainnya", value: 5, color: "#6b7280" }
+        ],
+        topografi: "Dataran bergelombang dengan ketinggian rata-rata 150 meter di atas permukaan laut.",
+        iklim: "Curah hujan rata-rata 2.000 mm/tahun, dengan suhu udara berkisar antara 24°C - 32°C.",
+        petaUrl: "Kantor Desa Pasir Panjang Mempawah"
+      },
+      demografi: {
+        pendudukTotal: "2.507",
+        pendudukLaki: "1.291",
+        pendudukPerempuan: "1.216",
+        kepalaKeluarga: "773",
+        strukturUmur: [
+          { range: "0 - 14 th", value: 20 },
+          { range: "15 - 24 th", value: 15 },
+          { range: "25 - 44 th", value: 30 },
+          { range: "45 - 59 th", value: 25 },
+          { range: "60+ th", value: 10 }
+        ],
+        mataPencaharian: [
+          { label: "Petani", value: 40, color: "#10b981" },
+          { label: "Nelayan", value: 10, color: "#0ea5e9" },
+          { label: "Wiraswasta", value: 20, color: "#3b82f6" },
+          { label: "Pedagang", value: 15, color: "#f59e0b" },
+          { label: "Pekerja Swasta/Buruh", value: 10, color: "#64748b" },
+          { label: "PNS/TNI/Polri", value: 5, color: "#ec4899" },
+          { label: "Lainnya", value: 0, color: "#8b5cf6" }
+        ],
+        tingkatPendidikan: [
+          { level: "Tidak Sekolah", value: 5 },
+          { level: "SD / Sederajat", value: 35 },
+          { level: "SMP / Sederajat", value: 25 },
+          { level: "SMA / Sederajat", value: 25 },
+          { level: "Sarjana", value: 10 }
+        ],
+        quote: "Masyarakat Penibung rukun dan gotong royong."
+      },
+      pemerintahan: {
+        kadesNama: "Subadi",
+        kadesJabatan: "Kepala Desa",
+        kadesStatus: "Definitif",
+        kadesMasaBakti: "2021 - 2027",
+        kadesFotoUrl: "",
+        danaDesaLabel: "Dana Desa 2024",
+        danaDesaValue: "Rp 906.011.000",
+        sekdesNama: "------",
+        sekdesFotoUrl: "",
+        staffKasiPem: "Supaat",
+        staffKasiPemFotoUrl: "",
+        staffKasiPel: "Jumadi",
+        staffKasiPelFotoUrl: "",
+        staffKasiKesra: "Rofiq",
+        staffKasiKesraFotoUrl: "",
+        staffKaurTU: "M. Abdul Rofiq",
+        staffKaurTUFotoUrl: "",
+        staffKaurKeu: "Abdul Aziz",
+        staffKaurKeuFotoUrl: "",
+        staffKaurPerc: "Mulyono",
+        staffKaurPercFotoUrl: "",
+        kadus1: "------",
+        kadus2: "Ahmad Rifa'i, S.Pd.I.",
+        kadus3: "Nur Ali Fais",
+        kadus: [
+          { dusun: "Dusun I", pejabat: "------", fotoUrl: "" },
+          { dusun: "Dusun II", pejabat: "Ahmad Rifa'i, S.Pd.I.", fotoUrl: "" },
+          { dusun: "Dusun III", pejabat: "Nur Ali Fais", fotoUrl: "" }
+        ],
+        struktur: {
+          kepalaDesa: "Subadi",
+          sekretaris: "------",
+          kasi: [
+            { nama: "Kasi Pemerintahan", pejabat: "------", fotoUrl: "" },
+            { nama: "Kasi Pelayanan", pejabat: "Sudar Santosa", fotoUrl: "" },
+            { nama: "Kasi Kesejahteraan", pejabat: "Hasan", fotoUrl: "" }
+          ],
+          kaur: [
+            { nama: "Kaur TU dan Umum", pejabat: "Setiawan, S.E.", fotoUrl: "" },
+            { nama: "Kaur Keuangan", pejabat: "Hj. Nor Azizah", fotoUrl: "" },
+            { nama: "Kaur Perencanaan", pejabat: "Bustanul Arifin", fotoUrl: "" }
+          ],
+          kewilayahan: "Kepala Dusun / RT / RW"
+        },
+        visi: "Terwujudnya Desa yang Maju, Mandiri, Sejahtera, dan Berbudaya Luhur.",
+        misi: [
+          "Meningkatkan kualitas pelayanan publik berbasis digital.",
+          "Mengentaskan kemiskinan dan kesenjangan ekonomi masyarakat.",
+          "Membangun infrastruktur desa yang merata dan berkelanjutan.",
+          "Mewujudkan lingkungan pemukiman desa yang bersih, sehat, dan asri."
+        ],
+        peraturanUrl: "#",
+        apbdesFotoUrl: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&q=80",
+        email: "desapenibung007@gmail.com",
+        facebook: "Penibung Rukun",
+        instagram: "@PenibungRukun",
+        tiktok: "@PenibungRukun"
+      },
+      potensi: {
+        ekonomi: [
+          { nama: "Pertanian Padi", desc: "Padi, Kopi, Kakao, Sayuran", img: "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=400&q=80" },
+          { nama: "UMKM Kerajinan", desc: "Kerajinan tangan lokal bermutu tinggi.", img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=400&q=80" },
+          { nama: "Peternakan", desc: "Ternak unggas dan sapi perah.", img: "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=400&q=80" }
+        ],
+        wisata: [
+          { nama: "Wisata Alam", desc: "Air Terjun, Bukit, Hutan Desa", img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=400&q=80" },
+          { nama: "Sanggar Tari", desc: "Sanggar seni kebudayaan daerah.", img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=400&q=80" }
+        ],
+        sda: [
+          { nama: "Air Bersih", desc: "Mata air alami yang jernih.", img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=400&q=80" },
+          { nama: "Tanah Subur", desc: "Tanah subur dan produktif.", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=400&q=80" }
+        ]
+      },
+      sosbud: {
+        adatIstiadat: "Tradisi selamatan bumi, nyadran, dan gotong royong masih lestari.",
+        bahasaDaerah: "Bahasa Jawa digunakan sehari-hari dalam kehidupan masyarakat.",
+        kesenian: "Tari tradisional, karawitan, hadroh, dan rebean.",
+        agamaKepercayaan: "Masyarakat hidup rukun dalam kerukunan umat beragama.",
+        lembagaKemasyarakatan: "BPD, LPM, PKK, Karang Taruna, RT/RW, BUMDes, Linmas, dan Posyandu.",
+        gambarBudaya: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=600&q=80"
+      },
+      infrastruktur: {
+        pendidikan: "1 TK, 2 SD, 1 SMP - Tersedia dan aktif",
+        pendidikanStatus: "Lengkap",
+        kesehatan: "1 Puskesdes, 2 Posyandu, 1 Polindes, 1 Pustu",
+        kesehatanStatus: "2 Faskes",
+        ambulansStatus: "1 Unit",
+        ambulansDetail: "Ambulans siaga 24 jam untuk warga",
+        ibadah: "2 Masjid, 1 Gereja, 1 Musholla",
+        ibadahStatus: "3 Tempat",
+        jalanJembatan: "Jalan desa sudah beraspal 80%, Jembatan permanen 2 unit.",
+        jalanStatus: "80% Aspal",
+        airClean: "90% warga mendapatkan akses air bersih.",
+        airBersih: "90% warga mendapatkan akses air bersih.",
+        airStatus: "90%",
+        listrik: "100% rumah teraliri listrik PLN.",
+        listrikStatus: "100%"
+      },
+      pengangguran: {
+        total: "64 Jiwa",
+        pendidikan: [
+          { level: "Tidak Sekolah", count: 2, percent: 3 },
+          { level: "SD / Sederajat", count: 18, percent: 28 },
+          { level: "SMP / Sederajat", count: 22, percent: 34 },
+          { level: "SMA / Sederajat", count: 20, percent: 31 },
+          { level: "Diploma / S1", count: 2, percent: 4 }
+        ],
+        gender: [
+          { label: "Laki-laki", count: 34, percent: 53.1, color: "#3b82f6" },
+          { label: "Perempuan", count: 30, percent: 46.9, color: "#ec4899" }
+        ]
+      }
+    };
+
+    // Keep reference to raw XML template
+    let rawXmlTemplate = "";
+    let isHtmlTemplate = false;
+
+    function saveCurrentDataToStorage() {
+      const data = getJsonDataFromForm();
+      localStorage.setItem("profilDesaData", JSON.stringify(data));
+      localStorage.setItem("rawTemplateText", rawXmlTemplate);
+      localStorage.setItem("isHtmlTemplate", isHtmlTemplate ? "true" : "false");
+    }
+
+    // Load XML template on load
+    window.addEventListener("DOMContentLoaded", async () => {
+      // Restore template and data from localStorage if they exist
+      const savedData = localStorage.getItem("profilDesaData");
+      const savedTemplate = localStorage.getItem("rawTemplateText");
+      const savedIsHtml = localStorage.getItem("isHtmlTemplate");
+
+      if (savedData) {
+        try {
+          const parsed = JSON.parse(savedData);
+          Object.assign(currentData, parsed);
+        } catch (e) { }
+      }
+
+      // Only load cached template if it contains hot-hydration, map support, and new organogram stacking/photo styles/gallery/dynamic-contact/resolved-province/uppercase-header
+      if (savedTemplate && savedTemplate.includes("window.hydratePage") && savedTemplate.includes("convertToEmbedUrl") && savedTemplate.includes("pem.sekdesFotoUrl") && savedTemplate.includes("pem-gallery-section") && savedTemplate.includes("contact-village-kec-kab") && savedTemplate.includes("header-village-provinsi") && savedTemplate.includes("provinsi.toUpperCase()")) {
+        rawXmlTemplate = savedTemplate;
+        isHtmlTemplate = savedIsHtml === "true";
+      } else {
+        // Clear old cached template to force re-fetch of the updated one
+        localStorage.removeItem("rawTemplateText");
+        localStorage.removeItem("isHtmlTemplate");
+        try {
+          // Try fetching local HTML template first (for local development)
+          const response = await fetch("2. theme_template V3.html");
+          if (response.ok) {
+            rawXmlTemplate = await response.text();
+            isHtmlTemplate = true;
+          } else {
+            const response2 = await fetch("2. theme_template.html");
+            if (response2.ok) {
+              rawXmlTemplate = await response2.text();
+              isHtmlTemplate = true;
+            } else {
+              const response3 = await fetch("theme_template.html");
+              if (response3.ok) {
+                rawXmlTemplate = await response3.text();
+                isHtmlTemplate = true;
+              }
+            }
+          }
+        } catch (e) {
+          try {
+            const response = await fetch("theme_template.html");
+            if (response.ok) {
+              rawXmlTemplate = await response.text();
+              isHtmlTemplate = true;
+            }
+          } catch (e2) {
+            console.log("Local fetch blocked by CORS or file not served. Using built-in generator fallback.");
+          }
+        }
+      }
+
+      loadDataToForm(currentData);
+      buildDynamicPotensiLists();
+      updatePreview(true); // Force full reload initially
+
+      // Bind input events on form container to auto-save to storage
+      const formFieldsEl = document.getElementById("form-fields");
+      if (formFieldsEl) {
+        formFieldsEl.addEventListener("input", saveCurrentDataToStorage);
+      }
+
+      // Load ImgBB API key if saved
+      const savedApiKey = localStorage.getItem("imgbb_api_key") || "d8cbd664cfd60ec61d92c8f623f8979a";
+      const keyInput = document.getElementById("imgbb-api-key");
+      if (keyInput) keyInput.value = savedApiKey;
+
+      // Initialize Upload Buttons for static inputs
+      initializeUploadButtons();
+    });
+
+    // Save API key
+    function saveImgbbKey() {
+      const keyVal = document.getElementById("imgbb-api-key").value.trim();
+      localStorage.setItem("imgbb_api_key", keyVal || "d8cbd664cfd60ec61d92c8f623f8979a");
+    }
+
+    // Toggle key visibility
+    function toggleKeyVisibility() {
+      const keyInput = document.getElementById("imgbb-api-key");
+      const eyeIcon = document.getElementById("imgbb-key-eye");
+      if (keyInput && eyeIcon) {
+        if (keyInput.type === "password") {
+          keyInput.type = "text";
+          eyeIcon.className = "fa-solid fa-eye-slash";
+        } else {
+          keyInput.type = "password";
+          eyeIcon.className = "fa-solid fa-eye";
+        }
+      }
+    }
+
+    // Initialize Upload Buttons for static inputs
+    function initializeUploadButtons() {
+      const targetIds = [
+        "sej-gambar1", "sej-gambar2", "sej-gambar3",
+        "pem-kadesFoto", "pem-sekdesFoto",
+        "pem-kasi-pemFoto", "pem-kasi-pelFoto", "pem-kasi-kesraFoto",
+        "pem-kaur-tuFoto", "pem-kaur-keuFoto", "pem-kaur-percFoto",
+        "pem-staff-kasi-pemFoto", "pem-staff-kasi-pelFoto", "pem-staff-kasi-kesraFoto",
+        "pem-staff-kaur-tuFoto", "pem-staff-kaur-keuFoto", "pem-staff-kaur-percFoto",
+        "sb-gambar", "pem-apbdesFoto"
+      ];
+
+      targetIds.forEach(id => {
+        const input = document.getElementById(id);
+        if (input && !input.dataset.uploaderInitialized) {
+          input.dataset.uploaderInitialized = "true";
+          
+          const wrapper = document.createElement("div");
+          wrapper.style.display = "flex";
+          wrapper.style.gap = "6px";
+          wrapper.style.marginTop = "4px";
+          
+          input.parentNode.insertBefore(wrapper, input);
+          wrapper.appendChild(input);
+          
+          input.style.flexGrow = "1";
+          input.style.margin = "0";
+          
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "btn-upload-image";
+          btn.style.flexShrink = "0";
+          btn.style.display = "inline-flex";
+          btn.style.alignItems = "center";
+          btn.style.gap = "4px";
+          btn.style.padding = "6px 12px";
+          btn.style.fontSize = "12px";
+          btn.style.background = "#f1f5f9";
+          btn.style.border = "1px solid #cbd5e1";
+          btn.style.borderRadius = "8px";
+          btn.style.cursor = "pointer";
+          btn.style.color = "#475569";
+          btn.style.fontWeight = "600";
+          btn.style.transition = "all 0.2s ease";
+          btn.style.height = "36px";
+          btn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Unggah`;
+          
+          btn.onmouseover = () => { btn.style.background = "#e2e8f0"; };
+          btn.onmouseout = () => { btn.style.background = "#f1f5f9"; };
+          
+          btn.onclick = () => triggerImgbbUpload(input);
+          
+          wrapper.appendChild(btn);
+        }
+      });
+    }
+
+    // Global function to trigger image upload via ImgBB
+    function triggerImgbbUpload(inputEl) {
+      const apiKeyInput = document.getElementById("imgbb-api-key");
+      const apiKey = (apiKeyInput ? apiKeyInput.value.trim() : "") || "d8cbd664cfd60ec61d92c8f623f8979a";
+
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/*";
+      
+      fileInput.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const btn = inputEl.nextElementSibling;
+        const originalHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>...`;
+
+        const formData = new FormData();
+        formData.append("image", file);
+
+        try {
+          const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+            method: "POST",
+            body: formData
+          });
+
+          const result = await response.json();
+          if (response.ok && result.success) {
+            const directUrl = result.data.url;
+            inputEl.value = directUrl;
+            
+            // Dispatch input event to update previews
+            inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+            
+            alert("Gambar berhasil diunggah ke ImgBB!");
+          } else {
+            const errMsg = result.error ? result.error.message : "Terjadi kesalahan upload.";
+            alert(`Gagal upload: ${errMsg}`);
+          }
+        } catch (err) {
+          alert(`Gagal menghubungi server ImgBB: ${err.message}`);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = originalHtml;
+        }
+      };
+
+      fileInput.click();
+    }
+
+    // Switch Tabs in Editor
+    function switchTab(evt, tabId) {
+      const tabContents = document.querySelectorAll(".form-tab-content");
+      tabContents.forEach(tc => tc.classList.remove("active"));
+
+      const tabBtns = document.querySelectorAll(".tab-btn");
+      tabBtns.forEach(tb => tb.classList.remove("active"));
+
+      document.getElementById(tabId).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Set Preview Mode (Desktop / Tablet / Mobile)
+    function setPreviewMode(mode) {
+      const iframe = document.getElementById("preview-iframe");
+      iframe.className = mode;
+
+      const buttons = document.querySelectorAll(".preview-mode-btn");
+      buttons.forEach(btn => btn.classList.remove("active"));
+      event.currentTarget.classList.add("active");
+    }
+
+    // Load current JSON data into the Form Inputs
+    function loadDataToForm(data) {
+      // Identitas
+      document.getElementById("namaDesa").value = data.namaDesa || "";
+      document.getElementById("motto").value = data.motto || "";
+      document.getElementById("kontakPhone").value = data.kontakPhone || "";
+      document.getElementById("kecamatan").value = data.kecamatan || "";
+      document.getElementById("kabupaten").value = data.kabupaten || "";
+      document.getElementById("provinsi").value = data.provinsi || "";
+
+      // Sejarah
+      document.getElementById("sej-asalUsul").value = data.sejarah.asalUsul || "";
+      document.getElementById("sej-kondisiAwal").value = data.sejarah.kondisiAwal || "";
+      document.getElementById("sej-perkembangan").value = data.sejarah.perkembangan || "";
+      document.getElementById("sej-quote").value = data.sejarah.quote || "";
+      document.getElementById("sej-gambar1").value = data.sejarah.gambar1 || "";
+      document.getElementById("sej-gambar2").value = data.sejarah.gambar2 || "";
+      document.getElementById("sej-gambar3").value = data.sejarah.gambar3 || "";
+
+      // Geografis
+      document.getElementById("geo-letak").value = data.geografis.letakStrategis || "";
+      document.getElementById("geo-utara").value = data.geografis.batasUtara || "";
+      document.getElementById("geo-timur").value = data.geografis.batasTimur || "";
+      document.getElementById("geo-selatan").value = data.geografis.batasSelatan || "";
+      document.getElementById("geo-barat").value = data.geografis.batasBarat || "";
+      document.getElementById("geo-luas").value = data.geografis.luasTotal || "";
+      document.getElementById("geo-peta").value = data.geografis.petaUrl || "";
+      document.getElementById("geo-topografi").value = data.geografis.topografi || "";
+      document.getElementById("geo-iklim").value = data.geografis.iklim || "";
+      document.getElementById("geo-ketinggian").value = data.geografis.ketinggian || "2 mdpl";
+      document.getElementById("geo-bentangWilayah").value = data.geografis.bentangWilayah || "Pesisir / Dataran Rendah";
+      document.getElementById("geo-jarakKecamatan").value = data.geografis.jarakKecamatan || "5 Km";
+      document.getElementById("geo-jarakKabupaten").value = data.geografis.jarakKabupaten || "12 Km";
+      document.getElementById("geo-jarakProvinsi").value = data.geografis.jarakProvinsi || "80 Km";
+
+      // Geografis Luas Detail
+      if (data.geografis.luasDetail) {
+        document.getElementById("geo-p-permukiman").value = getLabelValue(data.geografis.luasDetail, "Permukiman");
+        document.getElementById("geo-p-sawah").value = getLabelValue(data.geografis.luasDetail, "Sawah");
+        document.getElementById("geo-p-kebun").value = getLabelValue(data.geografis.luasDetail, "Kebun");
+        document.getElementById("geo-p-hutan").value = getLabelValue(data.geografis.luasDetail, "Hutan");
+        document.getElementById("geo-p-lainnya").value = getLabelValue(data.geografis.luasDetail, "Lainnya");
+      }
+
+      // Demografi
+      document.getElementById("demo-total").value = data.demografi.pendudukTotal || "";
+      document.getElementById("demo-laki").value = data.demografi.pendudukLaki || "";
+      document.getElementById("demo-perempuan").value = data.demografi.pendudukPerempuan || "";
+      document.getElementById("demo-kk").value = data.demografi.kepalaKeluarga || "";
+      document.getElementById("demo-quote").value = data.demografi.quote || "";
+
+      // Struktur Umur
+      if (data.demografi.strukturUmur) {
+        document.getElementById("demo-u1").value = getRangeValue(data.demografi.strukturUmur, "0 - 14 th");
+        document.getElementById("demo-u2").value = getRangeValue(data.demografi.strukturUmur, "15 - 24 th");
+        document.getElementById("demo-u3").value = getRangeValue(data.demografi.strukturUmur, "25 - 44 th");
+        document.getElementById("demo-u4").value = getRangeValue(data.demografi.strukturUmur, "45 - 59 th");
+        document.getElementById("demo-u5").value = getRangeValue(data.demografi.strukturUmur, "60+ th");
+      }
+
+      // Mata Pencaharian
+      if (data.demografi.mataPencaharian) {
+        document.getElementById("demo-m-petani").value = getLabelValue(data.demografi.mataPencaharian, "Petani");
+        document.getElementById("demo-m-nelayan").value = getLabelValue(data.demografi.mataPencaharian, "Nelayan");
+        document.getElementById("demo-m-wiraswasta").value = getLabelValue(data.demografi.mataPencaharian, "Wiraswasta");
+        document.getElementById("demo-m-pedagang").value = getLabelValue(data.demografi.mataPencaharian, "Pedagang");
+        document.getElementById("demo-m-buruh").value = getLabelValue(data.demografi.mataPencaharian, "Pekerja Swasta/Buruh");
+        document.getElementById("demo-m-pegawai").value = getLabelValue(data.demografi.mataPencaharian, "PNS/TNI/Polri") || getLabelValue(data.demografi.mataPencaharian, "Pegawai");
+        document.getElementById("demo-m-lainnya").value = getLabelValue(data.demografi.mataPencaharian, "Lainnya");
+      }
+
+      // Pendidikan
+      if (data.demografi.tingkatPendidikan) {
+        document.getElementById("demo-e1").value = getLevelValue(data.demografi.tingkatPendidikan, "Tidak Sekolah");
+        document.getElementById("demo-e2").value = getLevelValue(data.demografi.tingkatPendidikan, "SD / Sederajat");
+        document.getElementById("demo-e3").value = getLevelValue(data.demografi.tingkatPendidikan, "SMP / Sederajat");
+        document.getElementById("demo-e4").value = getLevelValue(data.demografi.tingkatPendidikan, "SMA / Sederajat");
+        document.getElementById("demo-e5").value = getLevelValue(data.demografi.tingkatPendidikan, "Sarjana");
+      }
+
+      // Pemerintahan
+      document.getElementById("pem-kadesNama").value = data.pemerintahan.kadesNama || "";
+      document.getElementById("pem-kadesStatus").value = data.pemerintahan.kadesStatus || "Definitif";
+      document.getElementById("pem-kadesMasaBakti").value = data.pemerintahan.kadesMasaBakti || "";
+      document.getElementById("pem-kadesFoto").value = data.pemerintahan.kadesFotoUrl || "";
+      document.getElementById("pem-danaDesaLabel").value = data.pemerintahan.danaDesaLabel || "Dana Desa 2024";
+      document.getElementById("pem-danaDesaValue").value = data.pemerintahan.danaDesaValue || "Rp 906.011.000";
+      document.getElementById("pem-sekdes").value = data.pemerintahan.sekdesNama || "";
+      document.getElementById("pem-sekdesFoto").value = data.pemerintahan.sekdesFotoUrl || "";
+      document.getElementById("pem-visi").value = data.pemerintahan.visi || "";
+      document.getElementById("pem-misi").value = (data.pemerintahan.misi || []).join("\n");
+      document.getElementById("pem-perdes").value = data.pemerintahan.peraturanUrl || "";
+      document.getElementById("pem-apbdesFoto").value = data.pemerintahan.apbdesFotoUrl || "";
+      document.getElementById("pem-email").value = data.pemerintahan.email || "";
+      document.getElementById("pem-facebook").value = data.pemerintahan.facebook || "";
+      document.getElementById("pem-instagram").value = data.pemerintahan.instagram || "";
+      document.getElementById("pem-tiktok").value = data.pemerintahan.tiktok || "";
+
+      // Tema Warna
+      if (data.theme) {
+        document.getElementById("themePreset").value = data.theme.name || "green";
+        document.getElementById("themePri").value = data.theme.pri || "#00713d";
+        document.getElementById("themePriText").value = (data.theme.pri || "#00713d").toUpperCase();
+        
+        document.getElementById("themePri2").value = data.theme.pri2 || "#009955";
+        document.getElementById("themePri2Text").value = (data.theme.pri2 || "#009955").toUpperCase();
+        
+        document.getElementById("themeInk").value = data.theme.ink || "#004022";
+        document.getElementById("themeInkText").value = (data.theme.ink || "#004022").toUpperCase();
+        
+        document.getElementById("themeDk").value = data.theme.dk || "#002b17";
+        document.getElementById("themeDkText").value = (data.theme.dk || "#002b17").toUpperCase();
+        
+        document.getElementById("themeBg").value = data.theme.bg || "#f4f9f6";
+        document.getElementById("themeBgText").value = (data.theme.bg || "#f4f9f6").toUpperCase();
+        
+        document.getElementById("themeLight").value = data.theme.primaryLight || "#e9f7ef";
+        document.getElementById("themeLightText").value = (data.theme.primaryLight || "#e9f7ef").toUpperCase();
+        
+        document.getElementById("themeBorder").value = data.theme.borderColor || "#a9dfbf";
+        document.getElementById("themeBorderText").value = (data.theme.borderColor || "#a9dfbf").toUpperCase();
+      } else {
+        document.getElementById("themePreset").value = "green";
+        handleThemeChange(); // Populate defaults automatically
+      }
+
+      // Staff & Kadus
+      document.getElementById("pem-staff-kasi-pem").value = data.pemerintahan.staffKasiPem || "";
+      document.getElementById("pem-staff-kasi-pemFoto").value = data.pemerintahan.staffKasiPemFotoUrl || "";
+      document.getElementById("pem-staff-kasi-pel").value = data.pemerintahan.staffKasiPel || "";
+      document.getElementById("pem-staff-kasi-pelFoto").value = data.pemerintahan.staffKasiPelFotoUrl || "";
+      document.getElementById("pem-staff-kasi-kesra").value = data.pemerintahan.staffKasiKesra || "";
+      document.getElementById("pem-staff-kasi-kesraFoto").value = data.pemerintahan.staffKasiKesraFotoUrl || "";
+      document.getElementById("pem-staff-kaur-tu").value = data.pemerintahan.staffKaurTU || "";
+      document.getElementById("pem-staff-kaur-tuFoto").value = data.pemerintahan.staffKaurTUFotoUrl || "";
+      document.getElementById("pem-staff-kaur-keu").value = data.pemerintahan.staffKaurKeu || "";
+      document.getElementById("pem-staff-kaur-keuFoto").value = data.pemerintahan.staffKaurKeuFotoUrl || "";
+      document.getElementById("pem-staff-kaur-perc").value = data.pemerintahan.staffKaurPerc || "";
+      document.getElementById("pem-staff-kaur-percFoto").value = data.pemerintahan.staffKaurPercFotoUrl || "";
+      // Migrate older flat Kadus fields if necessary
+      if (!data.pemerintahan.kadus) {
+        data.pemerintahan.kadus = [];
+        if (data.pemerintahan.kadus1) data.pemerintahan.kadus.push({ dusun: "Dusun I", pejabat: data.pemerintahan.kadus1, fotoUrl: "" });
+        if (data.pemerintahan.kadus2) data.pemerintahan.kadus.push({ dusun: "Dusun II", pejabat: data.pemerintahan.kadus2, fotoUrl: "" });
+        if (data.pemerintahan.kadus3) data.pemerintahan.kadus.push({ dusun: "Dusun III", pejabat: data.pemerintahan.kadus3, fotoUrl: "" });
+      }
+      buildDynamicKadusList(data.pemerintahan.kadus);
+
+      const struk = data.pemerintahan.struktur;
+      if (struk) {
+        document.getElementById("pem-kasi-pem").value = struk.kasi[0] ? struk.kasi[0].pejabat : "";
+        document.getElementById("pem-kasi-pemFoto").value = (struk.kasi[0] && struk.kasi[0].fotoUrl) ? struk.kasi[0].fotoUrl : "";
+        document.getElementById("pem-kasi-pel").value = struk.kasi[1] ? struk.kasi[1].pejabat : "";
+        document.getElementById("pem-kasi-pelFoto").value = (struk.kasi[1] && struk.kasi[1].fotoUrl) ? struk.kasi[1].fotoUrl : "";
+        document.getElementById("pem-kasi-kesra").value = struk.kasi[2] ? struk.kasi[2].pejabat : "";
+        document.getElementById("pem-kasi-kesraFoto").value = (struk.kasi[2] && struk.kasi[2].fotoUrl) ? struk.kasi[2].fotoUrl : "";
+        document.getElementById("pem-kaur-tu").value = struk.kaur[0] ? struk.kaur[0].pejabat : "";
+        document.getElementById("pem-kaur-tuFoto").value = (struk.kaur[0] && struk.kaur[0].fotoUrl) ? struk.kaur[0].fotoUrl : "";
+        document.getElementById("pem-kaur-keu").value = struk.kaur[1] ? struk.kaur[1].pejabat : "";
+        document.getElementById("pem-kaur-keuFoto").value = (struk.kaur[1] && struk.kaur[1].fotoUrl) ? struk.kaur[1].fotoUrl : "";
+        document.getElementById("pem-kaur-perc").value = struk.kaur[2] ? struk.kaur[2].pejabat : "";
+        document.getElementById("pem-kaur-percFoto").value = (struk.kaur[2] && struk.kaur[2].fotoUrl) ? struk.kaur[2].fotoUrl : "";
+        document.getElementById("pem-kewilayahan").value = struk.kewilayahan || "Kepala Dusun / RT / RW";
+      }
+
+      // Sosbud
+      document.getElementById("sb-adat").value = data.sosbud.adatIstiadat || "";
+      document.getElementById("sb-bahasa").value = data.sosbud.bahasaDaerah || "";
+      document.getElementById("sb-kesenian").value = data.sosbud.kesenian || "";
+      document.getElementById("sb-agama").value = data.sosbud.agamaKepercayaan || "";
+      document.getElementById("sb-lembaga").value = data.sosbud.lembagaKemasyarakatan || "";
+      document.getElementById("sb-gambar").value = data.sosbud.gambarBudaya || "";
+
+      // Infrastruktur
+      document.getElementById("inf-count-didik").value = data.infrastruktur.pendidikanStatus || "Ada";
+      document.getElementById("inf-didik").value = data.infrastruktur.pendidikan || "";
+      document.getElementById("inf-count-sehat").value = data.infrastruktur.kesehatanStatus || "Ada";
+      document.getElementById("inf-sehat").value = data.infrastruktur.kesehatan || "";
+      document.getElementById("inf-count-amb").value = data.infrastruktur.ambulansStatus || "Ada";
+      document.getElementById("inf-txt-amb").value = data.infrastruktur.ambulansDetail || "Tersedia";
+      document.getElementById("inf-count-ibadah").value = data.infrastruktur.ibadahStatus || "Ada";
+      document.getElementById("inf-ibadah").value = data.infrastruktur.ibadah || "";
+      document.getElementById("inf-count-air").value = data.infrastruktur.airStatus || "Cukup";
+      document.getElementById("inf-air").value = data.infrastruktur.airBersih || data.infrastruktur.airClean || "";
+      document.getElementById("inf-count-listrik").value = data.infrastruktur.listrikStatus || "100%";
+      document.getElementById("inf-listrik").value = data.infrastruktur.listrik || "";
+      document.getElementById("inf-count-jalan").value = data.infrastruktur.jalanStatus || "Baik";
+      document.getElementById("inf-jalan").value = data.infrastruktur.jalanJembatan || "";
+
+      // Pengangguran
+      document.getElementById("peng-total").value = data.pengangguran.total || "";
+      if (data.pengangguran.gender && data.pengangguran.gender[0]) {
+        document.getElementById("peng-laki-c").value = data.pengangguran.gender[0].count;
+        document.getElementById("peng-laki-p").value = data.pengangguran.gender[0].percent;
+        document.getElementById("peng-pr-c").value = data.pengangguran.gender[1].count;
+        document.getElementById("peng-pr-p").value = data.pengangguran.gender[1].percent;
+      }
+
+      if (data.pengangguran.pendidikan) {
+        document.getElementById("peng-ed1-c").value = getLevelCount(data.pengangguran.pendidikan, "Tidak Sekolah");
+        document.getElementById("peng-ed1-p").value = getLevelPercent(data.pengangguran.pendidikan, "Tidak Sekolah");
+        document.getElementById("peng-ed2-c").value = getLevelCount(data.pengangguran.pendidikan, "SD / Sederajat");
+        document.getElementById("peng-ed2-p").value = getLevelPercent(data.pengangguran.pendidikan, "SD / Sederajat");
+        document.getElementById("peng-ed3-c").value = getLevelCount(data.pengangguran.pendidikan, "SMP / Sederajat");
+        document.getElementById("peng-ed3-p").value = getLevelPercent(data.pengangguran.pendidikan, "SMP / Sederajat");
+        document.getElementById("peng-ed4-c").value = getLevelCount(data.pengangguran.pendidikan, "SMA / Sederajat");
+        document.getElementById("peng-ed4-p").value = getLevelPercent(data.pengangguran.pendidikan, "SMA / Sederajat");
+        document.getElementById("peng-ed5-c").value = getLevelCount(data.pengangguran.pendidikan, "Diploma / S1");
+        document.getElementById("peng-ed5-p").value = getLevelPercent(data.pengangguran.pendidikan, "Diploma / S1");
+      }
+    }
+
+    // Helper functions to get data from structure array
+    function getLabelValue(arr, label) {
+      const f = arr.find(i => i.label === label);
+      return f ? f.value : "";
+    }
+    function getRangeValue(arr, range) {
+      const f = arr.find(i => i.range === range);
+      return f ? f.value : "";
+    }
+    function getLevelValue(arr, level) {
+      const f = arr.find(i => i.level === level);
+      return f ? f.value : "";
+    }
+    function getLevelCount(arr, level) {
+      const f = arr.find(i => i.level === level);
+      return f ? f.count : "";
+    }
+    function getLevelPercent(arr, level) {
+      const f = arr.find(i => i.level === level);
+      return f ? f.percent : "";
+    }
+
+    // Build Potensi dynamic forms
+    function buildDynamicPotensiLists() {
+      // Economy
+      const ecoContainer = document.getElementById("potensi-ekonomi-list");
+      ecoContainer.innerHTML = "";
+      for (let i = 0; i < 3; i++) {
+        const item = currentData.potensi.ekonomi[i] || { nama: "", desc: "", img: "" };
+        ecoContainer.innerHTML += `
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--secondary);">Kartu Ekonomi ${i + 1}</label>
+            <div class="form-group row" style="margin-top:5px;">
+              <div>
+                <label>Nama Potensi</label>
+                <input type="text" id="pot-eco-nama-${i}" value="${item.nama}" oninput="updatePreview()">
+              </div>
+              <div>
+                <label>URL Gambar</label>
+                <div style="display: flex; gap: 6px; margin-top: 4px;">
+                  <input type="text" id="pot-eco-img-${i}" value="${item.img}" oninput="updatePreview()" style="flex-grow: 1; margin: 0;">
+                  <button type="button" class="btn-upload-image" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; color: #475569; font-weight: 600; transition: all 0.2s ease; height: 36px;" onclick="triggerImgbbUpload(this.previousElementSibling)" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Unggah
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Keterangan Singkat</label>
+              <input type="text" id="pot-eco-desc-${i}" value="${item.desc}" oninput="updatePreview()">
+            </div>
+          </div>
+        `;
+      }
+
+      // Tourism
+      const tourContainer = document.getElementById("potensi-wisata-list");
+      tourContainer.innerHTML = "";
+      for (let i = 0; i < 2; i++) {
+        const item = currentData.potensi.wisata[i] || { nama: "", desc: "", img: "" };
+        tourContainer.innerHTML += `
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--secondary);">Kartu Wisata ${i + 1}</label>
+            <div class="form-group row" style="margin-top:5px;">
+              <div>
+                <label>Nama Destinasi</label>
+                <input type="text" id="pot-tour-nama-${i}" value="${item.nama}" oninput="updatePreview()">
+              </div>
+              <div>
+                <label>URL Gambar</label>
+                <div style="display: flex; gap: 6px; margin-top: 4px;">
+                  <input type="text" id="pot-tour-img-${i}" value="${item.img}" oninput="updatePreview()" style="flex-grow: 1; margin: 0;">
+                  <button type="button" class="btn-upload-image" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; color: #475569; font-weight: 600; transition: all 0.2s ease; height: 36px;" onclick="triggerImgbbUpload(this.previousElementSibling)" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Unggah
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Keterangan Singkat</label>
+              <input type="text" id="pot-tour-desc-${i}" value="${item.desc}" oninput="updatePreview()">
+            </div>
+          </div>
+        `;
+      }
+
+      // SDA
+      const sdaContainer = document.getElementById("potensi-sda-list");
+      sdaContainer.innerHTML = "";
+      for (let i = 0; i < 2; i++) {
+        const item = currentData.potensi.sda[i] || { nama: "", desc: "", img: "" };
+        sdaContainer.innerHTML += `
+          <div class="card-editor-row">
+            <label style="font-weight:700; color:var(--secondary);">Kartu SDA ${i + 1}</label>
+            <div class="form-group row" style="margin-top:5px;">
+              <div>
+                <label>Nama Sumber Daya</label>
+                <input type="text" id="pot-sda-nama-${i}" value="${item.nama}" oninput="updatePreview()">
+              </div>
+              <div>
+                <label>URL Gambar</label>
+                <div style="display: flex; gap: 6px; margin-top: 4px;">
+                  <input type="text" id="pot-sda-img-${i}" value="${item.img}" oninput="updatePreview()" style="flex-grow: 1; margin: 0;">
+                  <button type="button" class="btn-upload-image" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; color: #475569; font-weight: 600; transition: all 0.2s ease; height: 36px;" onclick="triggerImgbbUpload(this.previousElementSibling)" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Unggah
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Keterangan Singkat</label>
+              <input type="text" id="pot-sda-desc-${i}" value="${item.desc}" oninput="updatePreview()">
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Build Kadus dynamic list
+    function buildDynamicKadusList(kadusArray) {
+      const container = document.getElementById("kadus-dynamic-list");
+      container.innerHTML = "";
+
+      if (!kadusArray || kadusArray.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 20px; border: 1px dashed var(--border-color); border-radius: 8px; color: var(--text-muted); font-size: 0.8rem; background: #fafbfc;">
+            Belum ada Kepala Dusun yang terdaftar.
+          </div>
+        `;
+        return;
+      }
+
+      kadusArray.forEach((item, index) => {
+        container.innerHTML += `
+          <div class="card-editor-row" id="kadus-row-${index}" style="position: relative; padding-right: 40px; margin-bottom: 12px;">
+            <button type="button" onclick="removeKadusRow(${index})" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.1rem; padding: 5px;" title="Hapus Kepala Dusun">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <div class="form-group row" style="margin-bottom: 8px;">
+              <div>
+                <label>Nama Wilayah / Dusun</label>
+                <input type="text" class="kadus-dusun-input" value="${item.dusun || ''}" placeholder="Contoh: Dusun I / Dusun Pasir Mandar" oninput="updatePreview()">
+              </div>
+              <div>
+                <label>Nama Pejabat (Kadus)</label>
+                <input type="text" class="kadus-pejabat-input" value="${item.pejabat || ''}" placeholder="Nama Pejabat..." oninput="updatePreview()">
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label>URL Foto Kepala Dusun</label>
+              <div style="display: flex; gap: 6px; margin-top: 4px;">
+                <input type="text" class="kadus-foto-input" value="${item.fotoUrl || ''}" placeholder="URL Foto..." oninput="updatePreview()" style="flex-grow: 1; margin: 0;">
+                <button type="button" class="btn-upload-image" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; color: #475569; font-weight: 600; transition: all 0.2s ease; height: 36px;" onclick="triggerImgbbUpload(this.previousElementSibling)" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Unggah
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Add dynamic Kadus row
+    function addKadusRow() {
+      const kadusList = [];
+      const rows = document.querySelectorAll("#kadus-dynamic-list .card-editor-row");
+      rows.forEach(row => {
+        const dusunInput = row.querySelector(".kadus-dusun-input");
+        const pejabatInput = row.querySelector(".kadus-pejabat-input");
+        const fotoInput = row.querySelector(".kadus-foto-input");
+        if (dusunInput && pejabatInput) {
+          kadusList.push({
+            dusun: dusunInput.value.trim(),
+            pejabat: pejabatInput.value.trim(),
+            fotoUrl: fotoInput ? fotoInput.value.trim() : ""
+          });
+        }
+      });
+
+      const newIndex = kadusList.length + 1;
+      let newDusunName = "Dusun I";
+      if (newIndex === 2) newDusunName = "Dusun II";
+      else if (newIndex === 3) newDusunName = "Dusun III";
+      else if (newIndex > 3) newDusunName = "Dusun " + newIndex;
+
+      kadusList.push({
+        dusun: newDusunName,
+        pejabat: "",
+        fotoUrl: ""
+      });
+
+      buildDynamicKadusList(kadusList);
+      saveCurrentDataToStorage();
+      updatePreview();
+    }
+
+    // Remove dynamic Kadus row
+    function removeKadusRow(index) {
+      const kadusList = [];
+      const rows = document.querySelectorAll("#kadus-dynamic-list .card-editor-row");
+      rows.forEach((row, rIdx) => {
+        if (rIdx === index) return; // Skip this one
+        const dusunInput = row.querySelector(".kadus-dusun-input");
+        const pejabatInput = row.querySelector(".kadus-pejabat-input");
+        const fotoInput = row.querySelector(".kadus-foto-input");
+        if (dusunInput && pejabatInput) {
+          kadusList.push({
+            dusun: dusunInput.value.trim(),
+            pejabat: pejabatInput.value.trim(),
+            fotoUrl: fotoInput ? fotoInput.value.trim() : ""
+          });
+        }
+      });
+
+      buildDynamicKadusList(kadusList);
+      saveCurrentDataToStorage();
+      updatePreview();
+    }
+
+    // Read form values back into JSON object
+    function getJsonDataFromForm() {
+      const kadusList = [];
+      const rows = document.querySelectorAll("#kadus-dynamic-list .card-editor-row");
+      rows.forEach(row => {
+        const dusunInput = row.querySelector(".kadus-dusun-input");
+        const pejabatInput = row.querySelector(".kadus-pejabat-input");
+        const fotoInput = row.querySelector(".kadus-foto-input");
+        if (dusunInput && pejabatInput) {
+          kadusList.push({
+            dusun: dusunInput.value.trim(),
+            pejabat: pejabatInput.value.trim(),
+            fotoUrl: fotoInput ? fotoInput.value.trim() : ""
+          });
+        }
+      });
+
+      const data = {
+        namaDesa: document.getElementById("namaDesa").value,
+        motto: document.getElementById("motto").value,
+        kontakPhone: document.getElementById("kontakPhone").value,
+        kecamatan: document.getElementById("kecamatan").value,
+        kabupaten: document.getElementById("kabupaten").value,
+        provinsi: document.getElementById("provinsi").value,
+        sejarah: {
+          asalUsul: document.getElementById("sej-asalUsul").value,
+          kondisiAwal: document.getElementById("sej-kondisiAwal").value,
+          perkembangan: document.getElementById("sej-perkembangan").value,
+          quote: document.getElementById("sej-quote").value,
+          gambar1: document.getElementById("sej-gambar1").value,
+          gambar2: document.getElementById("sej-gambar2").value,
+          gambar3: document.getElementById("sej-gambar3").value
+        },
+        geografis: {
+          letakStrategis: document.getElementById("geo-letak").value,
+          batasUtara: document.getElementById("geo-utara").value,
+          batasTimur: document.getElementById("geo-timur").value,
+          batasSelatan: document.getElementById("geo-selatan").value,
+          batasBarat: document.getElementById("geo-barat").value,
+          luasTotal: document.getElementById("geo-luas").value,
+          luasDetail: [
+            { label: "Permukiman", value: Number(document.getElementById("geo-p-permukiman").value) || 0, color: "#f59e0b" },
+            { label: "Sawah", value: Number(document.getElementById("geo-p-sawah").value) || 0, color: "#10b981" },
+            { label: "Kebun", value: Number(document.getElementById("geo-p-kebun").value) || 0, color: "#84cc16" },
+            { label: "Hutan", value: Number(document.getElementById("geo-p-hutan").value) || 0, color: "#065f46" },
+            { label: "Lainnya", value: Number(document.getElementById("geo-p-lainnya").value) || 0, color: "#6b7280" }
+          ],
+          topografi: document.getElementById("geo-topografi").value,
+          iklim: document.getElementById("geo-iklim").value,
+          petaUrl: document.getElementById("geo-peta").value,
+          ketinggian: document.getElementById("geo-ketinggian").value,
+          bentangWilayah: document.getElementById("geo-bentangWilayah").value,
+          jarakKecamatan: document.getElementById("geo-jarakKecamatan").value,
+          jarakKabupaten: document.getElementById("geo-jarakKabupaten").value,
+          jarakProvinsi: document.getElementById("geo-jarakProvinsi").value
+        },
+        demografi: {
+          pendudukTotal: document.getElementById("demo-total").value,
+          pendudukLaki: document.getElementById("demo-laki").value,
+          pendudukPerempuan: document.getElementById("demo-perempuan").value,
+          kepalaKeluarga: document.getElementById("demo-kk").value,
+          strukturUmur: [
+            { range: "0 - 14 th", value: Number(document.getElementById("demo-u1").value) || 0 },
+            { range: "15 - 24 th", value: Number(document.getElementById("demo-u2").value) || 0 },
+            { range: "25 - 44 th", value: Number(document.getElementById("demo-u3").value) || 0 },
+            { range: "45 - 59 th", value: Number(document.getElementById("demo-u4").value) || 0 },
+            { range: "60+ th", value: Number(document.getElementById("demo-u5").value) || 0 }
+          ],
+          mataPencaharian: [
+            { label: "Petani", value: Number(document.getElementById("demo-m-petani").value) || 0, color: "#10b981" },
+            { label: "Nelayan", value: Number(document.getElementById("demo-m-nelayan").value) || 0, color: "#0ea5e9" },
+            { label: "Wiraswasta", value: Number(document.getElementById("demo-m-wiraswasta").value) || 0, color: "#3b82f6" },
+            { label: "Pedagang", value: Number(document.getElementById("demo-m-pedagang").value) || 0, color: "#f59e0b" },
+            { label: "Pekerja Swasta/Buruh", value: Number(document.getElementById("demo-m-buruh").value) || 0, color: "#64748b" },
+            { label: "PNS/TNI/Polri", value: Number(document.getElementById("demo-m-pegawai").value) || 0, color: "#ec4899" },
+            { label: "Lainnya", value: Number(document.getElementById("demo-m-lainnya").value) || 0, color: "#8b5cf6" }
+          ],
+          tingkatPendidikan: [
+            { level: "Tidak Sekolah", value: Number(document.getElementById("demo-e1").value) || 0 },
+            { level: "SD / Sederajat", value: Number(document.getElementById("demo-e2").value) || 0 },
+            { level: "SMP / Sederajat", value: Number(document.getElementById("demo-e3").value) || 0 },
+            { level: "SMA / Sederajat", value: Number(document.getElementById("demo-e4").value) || 0 },
+            { level: "Sarjana", value: Number(document.getElementById("demo-e5").value) || 0 }
+          ],
+          quote: document.getElementById("demo-quote").value
+        },
+        pemerintahan: {
+          kadesNama: document.getElementById("pem-kadesNama").value,
+          kadesJabatan: "Kepala Desa",
+          kadesStatus: document.getElementById("pem-kadesStatus").value,
+          kadesMasaBakti: document.getElementById("pem-kadesMasaBakti").value,
+          kadesFotoUrl: document.getElementById("pem-kadesFoto").value,
+          danaDesaLabel: document.getElementById("pem-danaDesaLabel").value,
+          danaDesaValue: document.getElementById("pem-danaDesaValue").value,
+          sekdesNama: document.getElementById("pem-sekdes").value,
+          sekdesFotoUrl: document.getElementById("pem-sekdesFoto").value,
+          staffKasiPem: document.getElementById("pem-staff-kasi-pem").value,
+          staffKasiPemFotoUrl: document.getElementById("pem-staff-kasi-pemFoto").value,
+          staffKasiPel: document.getElementById("pem-staff-kasi-pel").value,
+          staffKasiPelFotoUrl: document.getElementById("pem-staff-kasi-pelFoto").value,
+          staffKasiKesra: document.getElementById("pem-staff-kasi-kesra").value,
+          staffKasiKesraFotoUrl: document.getElementById("pem-staff-kasi-kesraFoto").value,
+          staffKaurTU: document.getElementById("pem-staff-kaur-tu").value,
+          staffKaurTUFotoUrl: document.getElementById("pem-staff-kaur-tuFoto").value,
+          staffKaurKeu: document.getElementById("pem-staff-kaur-keu").value,
+          staffKaurKeuFotoUrl: document.getElementById("pem-staff-kaur-keuFoto").value,
+          staffKaurPerc: document.getElementById("pem-staff-kaur-perc").value,
+          staffKaurPercFotoUrl: document.getElementById("pem-staff-kaur-percFoto").value,
+          kadus: kadusList,
+          kadus1: kadusList[0] ? kadusList[0].pejabat : "",
+          kadus2: kadusList[1] ? kadusList[1].pejabat : "",
+          kadus3: kadusList[2] ? kadusList[2].pejabat : "",
+          struktur: {
+            kepalaDesa: document.getElementById("pem-kadesNama").value,
+            sekretaris: document.getElementById("pem-sekdes").value,
+            kasi: [
+              { nama: "Kasi Pemerintahan", pejabat: document.getElementById("pem-kasi-pem").value, fotoUrl: document.getElementById("pem-kasi-pemFoto").value },
+              { nama: "Kasi Pelayanan", pejabat: document.getElementById("pem-kasi-pel").value, fotoUrl: document.getElementById("pem-kasi-pelFoto").value },
+              { nama: "Kasi Kesejahteraan", pejabat: document.getElementById("pem-kasi-kesra").value, fotoUrl: document.getElementById("pem-kasi-kesraFoto").value }
+            ],
+            kaur: [
+              { nama: "Kaur TU dan Umum", pejabat: document.getElementById("pem-kaur-tu").value, fotoUrl: document.getElementById("pem-kaur-tuFoto").value },
+              { nama: "Kaur Keuangan", pejabat: document.getElementById("pem-kaur-keu").value, fotoUrl: document.getElementById("pem-kaur-keuFoto").value },
+              { nama: "Kaur Perencanaan", pejabat: document.getElementById("pem-kaur-perc").value, fotoUrl: document.getElementById("pem-kaur-percFoto").value }
+            ],
+            kewilayahan: document.getElementById("pem-kewilayahan").value
+          },
+          visi: document.getElementById("pem-visi").value,
+          misi: document.getElementById("pem-misi").value.split("\n").filter(line => line.trim() !== ""),
+          peraturanUrl: document.getElementById("pem-perdes").value,
+          apbdesFotoUrl: document.getElementById("pem-apbdesFoto").value,
+          email: document.getElementById("pem-email").value,
+          facebook: document.getElementById("pem-facebook").value,
+          instagram: document.getElementById("pem-instagram").value,
+          tiktok: document.getElementById("pem-tiktok").value
+        },
+        potensi: {
+          ekonomi: [],
+          wisata: [],
+          sda: []
+        },
+        sosbud: {
+          adatIstiadat: document.getElementById("sb-adat").value,
+          bahasaDaerah: document.getElementById("sb-bahasa").value,
+          kesenian: document.getElementById("sb-kesenian").value,
+          agamaKepercayaan: document.getElementById("sb-agama").value,
+          lembagaKemasyarakatan: document.getElementById("sb-lembaga").value,
+          gambarBudaya: document.getElementById("sb-gambar").value
+        },
+        infrastruktur: {
+          pendidikan: document.getElementById("inf-didik").value,
+          pendidikanStatus: document.getElementById("inf-count-didik").value,
+          kesehatan: document.getElementById("inf-sehat").value,
+          kesehatanStatus: document.getElementById("inf-count-sehat").value,
+          ambulansStatus: document.getElementById("inf-count-amb").value,
+          ambulansDetail: document.getElementById("inf-txt-amb").value,
+          ibadah: document.getElementById("inf-ibadah").value,
+          ibadahStatus: document.getElementById("inf-count-ibadah").value,
+          airClean: document.getElementById("inf-air").value,
+          airBersih: document.getElementById("inf-air").value,
+          airStatus: document.getElementById("inf-count-air").value,
+          listrik: document.getElementById("inf-listrik").value,
+          listrikStatus: document.getElementById("inf-count-listrik").value,
+          jalanJembatan: document.getElementById("inf-jalan").value,
+          jalanStatus: document.getElementById("inf-count-jalan").value
+        },
+        pengangguran: {
+          total: document.getElementById("peng-total").value,
+          pendidikan: [
+            { level: "Tidak Sekolah", count: Number(document.getElementById("peng-ed1-c").value) || 0, percent: Number(document.getElementById("peng-ed1-p").value) || 0 },
+            { level: "SD / Sederajat", count: Number(document.getElementById("peng-ed2-c").value) || 0, percent: Number(document.getElementById("peng-ed2-p").value) || 0 },
+            { level: "SMP / Sederajat", count: Number(document.getElementById("peng-ed3-c").value) || 0, percent: Number(document.getElementById("peng-ed3-p").value) || 0 },
+            { level: "SMA / Sederajat", count: Number(document.getElementById("peng-ed4-c").value) || 0, percent: Number(document.getElementById("peng-ed4-p").value) || 0 },
+            { level: "Diploma / S1", count: Number(document.getElementById("peng-ed5-c").value) || 0, percent: Number(document.getElementById("peng-ed5-p").value) || 0 }
+          ],
+          gender: [
+            { label: "Laki-laki", count: Number(document.getElementById("peng-laki-c").value) || 0, percent: Number(document.getElementById("peng-laki-p").value) || 0, color: "#3b82f6" },
+            { label: "Perempuan", count: Number(document.getElementById("peng-pr-c").value) || 0, percent: Number(document.getElementById("peng-pr-p").value) || 0, color: "#ec4899" }
+          ]
+        },
+        theme: (() => {
+          const themePresetVal = document.getElementById("themePreset").value;
+          const priVal = normalizeToHex(document.getElementById("themePriText").value);
+          const pri2Val = normalizeToHex(document.getElementById("themePri2Text").value);
+          const inkVal = normalizeToHex(document.getElementById("themeInkText").value);
+          const dkVal = normalizeToHex(document.getElementById("themeDkText").value);
+          const bgVal = normalizeToHex(document.getElementById("themeBgText").value);
+          const lightVal = normalizeToHex(document.getElementById("themeLightText").value);
+          const borderVal = normalizeToHex(document.getElementById("themeBorderText").value);
+          
+          return {
+            type: themePresetVal === "custom" ? "custom" : "preset",
+            name: themePresetVal,
+            pri: priVal,
+            pri2: pri2Val,
+            ink: inkVal,
+            dk: dkVal,
+            bg: bgVal,
+            primaryLight: lightVal,
+            borderColor: borderVal
+          };
+        })()
+      };
+
+      // Potensi lists rebuild
+      for (let i = 0; i < 3; i++) {
+        data.potensi.ekonomi.push({
+          nama: document.getElementById(`pot-eco-nama-${i}`).value,
+          desc: document.getElementById(`pot-eco-desc-${i}`).value,
+          img: document.getElementById(`pot-eco-img-${i}`).value
+        });
+      }
+      for (let i = 0; i < 2; i++) {
+        data.potensi.wisata.push({
+          nama: document.getElementById(`pot-tour-nama-${i}`).value,
+          desc: document.getElementById(`pot-tour-desc-${i}`).value,
+          img: document.getElementById(`pot-tour-img-${i}`).value
+        });
+        data.potensi.sda.push({
+          nama: document.getElementById(`pot-sda-nama-${i}`).value,
+          desc: document.getElementById(`pot-sda-desc-${i}`).value,
+          img: document.getElementById(`pot-sda-img-${i}`).value
+        });
+      }
+
+      return data;
+    }
+
+    // Helper function to statically update WhatsApp link and contact number display in HTML/XML template text
+    function updateStaticWhatsApp(htmlText, configData) {
+      if (!configData || !configData.kontakPhone) return htmlText;
+
+      let html = htmlText;
+      const phoneVal = configData.kontakPhone;
+
+      // Format clean number for wa.me link (replace non-digits, prefix 0 with 62)
+      let cleanNumber = phoneVal.replace(/\D/g, '');
+      if (cleanNumber.startsWith('0')) {
+        cleanNumber = '62' + cleanNumber.slice(1);
+      }
+
+      // Update contact-phone-display statically
+      html = html.replace(/(<[a-z0-9]+[^>]*id=['"]contact-phone-display['"][^>]*>)([\s\S]*?)(<\/[a-z0-9]+>)/gi, `$1${phoneVal}$3`);
+
+      // Update contact-whatsapp-display statically
+      html = html.replace(/(<[a-z0-9]+[^>]*id=['"]contact-whatsapp-display['"][^>]*>)([\s\S]*?)(<\/[a-z0-9]+>)/gi, `$1${phoneVal}$3`);
+
+      // Update contact-whatsapp-link href statically
+      if (cleanNumber) {
+        html = html.replace(/(<a\s+[^>]*id=['"]contact-whatsapp-link['"][^>]*>)/gi, (match) => {
+          return match.replace(/href=['"]([^'"]*)['"]/gi, `href="https://wa.me/${cleanNumber}"`);
+        });
+      }
+
+      return html;
+    }
+
+    // Convert Blogger XML theme to standard HTML that can render inside iframe
+    function compileBloggerXmlToHtml(xmlText, configData) {
+      let html = xmlText;
+
+      // Update static colors
+      html = updateStaticColors(html, configData);
+
+      // Convert b:skin to HTML style block
+      html = html.replace(/<b:skin><!\[CDATA\[([\s\S]*?)\]\]><\/b:skin>/g, '<style>$1</style>');
+
+      // Keep only homepage layout, discard b:else branch
+      const homepageRegex = /<b:if cond='data:view\.isHomepage'>([\s\S]*?)<b:else\/>([\s\S]*?)<\/b:if>/;
+      const match = html.match(homepageRegex);
+      if (match) {
+        html = html.replace(homepageRegex, '$1');
+      }
+
+      // Remove all Blogger XML tags but keep contents
+      html = html.replace(/<b:section[^>]*>/g, '').replace(/<\/b:section>/g, '');
+      html = html.replace(/<b:widget[^>]*>/g, '').replace(/<\/b:widget>/g, '');
+      html = html.replace(/<b:includable[^>]*>/g, '').replace(/<\/b:includable>/g, '');
+
+      // Replacements of Blogger XML variables
+      html = html.replace(/<data:blog.pageName\/>/g, 'Profil Desa');
+      html = html.replace(/<data:blog.title\/>/g, configData.namaDesa);
+
+      // Inject current config data into the configuration script tag
+      const scriptRegex = /<script id='profil-desa-data'[^>]*>([\s\S]*?)<\/script>/;
+      html = html.replace(scriptRegex, `<script id="profil-desa-data" type="application/json">${JSON.stringify(configData, null, 2)}<\/script>`);
+
+      // Statically update contact phone and WhatsApp displays/links
+      html = updateStaticWhatsApp(html, configData);
+
+      return html;
+    }
+
+    // Trigger update of Iframe Preview
+    // Convert HTML template by replacing JSON data in script tag
+    function compileHtmlTemplate(htmlText, configData) {
+      let html = htmlText;
+
+      // Update static colors
+      html = updateStaticColors(html, configData);
+
+      const dataString = JSON.stringify(configData, null, 2);
+      const scriptRegex = /(<script id=['"]profil-desa-data['"][^>]*>)([\s\S]*?)(<\/script>)/;
+
+      if (html.match(scriptRegex)) {
+        html = html.replace(scriptRegex, `$1\n${dataString}\n$3`);
+      }
+
+      // Statically update title and descriptions for SEO & link sharing
+      const titleVal = `Profil Resmi ${configData.namaDesa}`;
+      const descVal = `Portal Resmi Pemerintahan ${configData.namaDesa}, Kecamatan ${configData.kecamatan}, Kabupaten ${configData.kabupaten}.`;
+      
+      html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${titleVal}</title>`);
+      
+      // Replace metadata description tags
+      html = html.replace(/<meta\s+content='[^']*'\s+name='description'\s*\/?>/i, `<meta content='${descVal}' name='description' />`);
+      html = html.replace(/<meta\s+name='description'\s+content='[^']*'\s*\/?>/i, `<meta content='${descVal}' name='description' />`);
+      html = html.replace(/<meta\s+content="[^"]*"\s+name="description"\s*\/?>/i, `<meta content="${descVal}" name="description" />`);
+      html = html.replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i, `<meta content="${descVal}" name="description" />`);
+
+      // Replace Open Graph metadata tags for rich link sharing
+      html = html.replace(/<meta\s+property=['"]og:title['"]\s+content=['"][^'"]*['"]\s*\/?>/i, `<meta property="og:title" content="${titleVal}" />`);
+      html = html.replace(/<meta\s+property=['"]og:description['"]\s+content=['"][^'"]*['"]\s*\/?>/i, `<meta property="og:description" content="${descVal}" />`);
+      
+      const shareImg = (configData.sejarah && configData.sejarah.gambar1) || (configData.pemerintahan && configData.pemerintahan.kadesFotoUrl) || "";
+      if (shareImg) {
+        html = html.replace(/<meta\s+property=['"]og:image['"]\s+content=['"][^'"]*['"]\s*\/?>/i, `<meta property="og:image" content="${shareImg}" />`);
+      }
+
+      // Statically update contact phone and WhatsApp displays/links
+      html = updateStaticWhatsApp(html, configData);
+
+      return html;
+    }
+
+    // Convert hex or rgb or rgb numbers to standard hex format
+    function normalizeToHex(input) {
+      if (!input) return "#000000";
+      input = input.trim();
+      if (input.startsWith("#")) {
+        if (input.length === 4) {
+          return "#" + input[1] + input[1] + input[2] + input[2] + input[3] + input[3];
+        }
+        return input;
+      }
+      const match = input.match(/\d+/g);
+      if (match && match.length >= 3) {
+        const r = Math.min(255, Math.max(0, parseInt(match[0])));
+        const g = Math.min(255, Math.max(0, parseInt(match[1])));
+        const b = Math.min(255, Math.max(0, parseInt(match[2])));
+        return "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+      }
+      return input;
+    }
+
+    // Sync color input (picker) to text input
+    function syncColorPicker(pickerId, textId) {
+      const pickerVal = document.getElementById(pickerId).value;
+      document.getElementById(textId).value = pickerVal.toUpperCase();
+      document.getElementById("themePreset").value = "custom";
+      saveCurrentDataToStorage();
+      updatePreview();
+    }
+
+    // Sync text input to color input
+    function syncColorText(pickerId, textId) {
+      const textVal = document.getElementById(textId).value;
+      const hexVal = normalizeToHex(textVal);
+      if (/^#[0-9A-F]{6}$/i.test(hexVal)) {
+        document.getElementById(pickerId).value = hexVal;
+        document.getElementById("themePreset").value = "custom";
+        saveCurrentDataToStorage();
+        updatePreview();
+      }
+    }
+
+    // Auto calculate shades based on primary and secondary colors
+    function autoCalculateShades() {
+      const priVal = document.getElementById("themePri").value;
+      const priHsl = hexToHsl(priVal);
+      
+      const inkVal = hslToHex(priHsl.h, priHsl.s, Math.max(priHsl.l - 20, 10));
+      const dkVal = hslToHex(priHsl.h, priHsl.s, Math.max(priHsl.l - 30, 5));
+      const bgVal = hslToHex(priHsl.h, Math.min(priHsl.s, 30), 97);
+      const lightVal = hslToHex(priHsl.h, Math.min(priHsl.s, 40), 94);
+      const borderVal = hslToHex(priHsl.h, Math.min(priHsl.s, 50), 85);
+      
+      document.getElementById("themeInk").value = inkVal;
+      document.getElementById("themeInkText").value = inkVal.toUpperCase();
+      
+      document.getElementById("themeDk").value = dkVal;
+      document.getElementById("themeDkText").value = dkVal.toUpperCase();
+      
+      document.getElementById("themeBg").value = bgVal;
+      document.getElementById("themeBgText").value = bgVal.toUpperCase();
+      
+      document.getElementById("themeLight").value = lightVal;
+      document.getElementById("themeLightText").value = lightVal.toUpperCase();
+      
+      document.getElementById("themeBorder").value = borderVal;
+      document.getElementById("themeBorderText").value = borderVal.toUpperCase();
+      
+      document.getElementById("themePreset").value = "custom";
+      saveCurrentDataToStorage();
+      updatePreview();
+    }
+
+    // Handle theme change events
+    function handleThemeChange() {
+      const presetVal = document.getElementById("themePreset").value;
+      if (presetVal !== "custom") {
+        const preset = colorPresets[presetVal] || colorPresets.green;
+        
+        document.getElementById("themePri").value = preset.pri;
+        document.getElementById("themePriText").value = preset.pri.toUpperCase();
+        
+        document.getElementById("themePri2").value = preset.pri2;
+        document.getElementById("themePri2Text").value = preset.pri2.toUpperCase();
+        
+        document.getElementById("themeInk").value = preset.ink;
+        document.getElementById("themeInkText").value = preset.ink.toUpperCase();
+        
+        document.getElementById("themeDk").value = preset.dk;
+        document.getElementById("themeDkText").value = preset.dk.toUpperCase();
+        
+        document.getElementById("themeBg").value = preset.bg;
+        document.getElementById("themeBgText").value = preset.bg.toUpperCase();
+        
+        document.getElementById("themeLight").value = preset.primaryLight;
+        document.getElementById("themeLightText").value = preset.primaryLight.toUpperCase();
+        
+        document.getElementById("themeBorder").value = preset.borderColor;
+        document.getElementById("themeBorderText").value = preset.borderColor.toUpperCase();
+      }
+      saveCurrentDataToStorage();
+      updatePreview();
+    }
+
+    // Trigger update of Iframe Preview
+    // Trigger update of Iframe Preview
+    async function updatePreview(forceReload = false) {
+      const data = getJsonDataFromForm();
+      const iframe = document.getElementById("preview-iframe");
+
+      // If rawXmlTemplate is empty (not fetched yet, e.g. opened file:// without CORS), 
+      // let's fetch it again or warn. We can generate an inline XML representation or try to fetch it.
+      if (!rawXmlTemplate) {
+        try {
+          const response = await fetch("2. theme_template.html");
+          if (response.ok) {
+            rawXmlTemplate = await response.text();
+            isHtmlTemplate = true;
+          } else {
+            const r2 = await fetch("theme_template.html");
+            if (r2.ok) { rawXmlTemplate = await r2.text(); isHtmlTemplate = true; }
+          }
+        } catch (e) {
+          try {
+            const r2 = await fetch("theme_template.html");
+            if (r2.ok) { rawXmlTemplate = await r2.text(); isHtmlTemplate = true; }
+          } catch (e2) { }
+        }
+      }
+
+      if (rawXmlTemplate) {
+        // Try hot-updating without reloading the iframe if forceReload is false and hydratePage exists
+        try {
+          if (!forceReload && iframe && iframe.contentWindow && typeof iframe.contentWindow.hydratePage === "function") {
+            // Update the JSON data script tag inside the iframe
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const scriptEl = iframeDoc.getElementById("profil-desa-data");
+            if (scriptEl) {
+              scriptEl.textContent = JSON.stringify(data, null, 2);
+            }
+            // Execute the exposed hydration function
+            iframe.contentWindow.hydratePage(data);
+            return; // Successful hot update, exit early!
+          }
+        } catch (e) {
+          console.warn("Hot update failed, falling back to full reload:", e);
+        }
+
+        // Fallback/Forced full reload
+        let compiledHtml;
+        if (isHtmlTemplate) {
+          compiledHtml = compileHtmlTemplate(rawXmlTemplate, data);
+        } else {
+          compiledHtml = compileBloggerXmlToHtml(rawXmlTemplate, data);
+        }
+
+        // Preserve and restore scroll position on reload
+        if (iframe) {
+          iframe.onload = function () {
+            try {
+              if (iframe.contentWindow) {
+                // Restore scroll position
+                iframe.contentWindow.scrollTo(previewScrollX, previewScrollY);
+
+                // Track subsequent user scrolling inside the iframe
+                iframe.contentWindow.addEventListener("scroll", () => {
+                  try {
+                    previewScrollX = iframe.contentWindow.scrollX || iframe.contentDocument.documentElement.scrollLeft;
+                    previewScrollY = iframe.contentWindow.scrollY || iframe.contentDocument.documentElement.scrollTop;
+                  } catch (e) { }
+                });
+              }
+            } catch (e) { }
+          };
+        }
+
+        iframe.srcdoc = compiledHtml;
+      } else {
+        iframe.srcdoc = `
+          <div style="padding: 40px; text-align: center; font-family: sans-serif; color: #64748b;">
+            <i class="fa-solid fa-file-excel" style="font-size: 3rem; color: #ef4444; margin-bottom: 20px;"></i>
+            <h3>Template dasar tidak ditemukan atau CORS diblokir.</h3>
+            <p style="font-size: 0.85rem; margin-top: 10px;">
+              Buka aplikasi ini menggunakan web server lokal (seperti Live Server VSCode) atau unggah file tema <code>theme_template.xml</code> atau <code>theme_template.html</code> menggunakan tombol Impor di atas terlebih dahulu untuk mengaktifkan Pratinjau.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    // Trigger XML Import File Dialog
+    function triggerImport() {
+      document.getElementById("import-file-input").click();
+    }
+
+    // Parse the uploaded Blogger XML and extract the json configuration
+    function handleImportFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const text = e.target.result;
+
+        // Save imported XML as current template
+        rawXmlTemplate = text;
+        isHtmlTemplate = false;
+
+        // Find JSON script
+        const match = text.match(/<script id='profil-desa-data'[^>]*>([\s\S]*?)<\/script>/);
+        if (match) {
+          try {
+            const data = JSON.parse(match[1].trim());
+            loadDataToForm(data);
+            buildDynamicPotensiLists();
+            saveCurrentDataToStorage();
+            updatePreview(true);
+            alert("Berhasil mengimpor data profil desa dari file XML!");
+          } catch (err) {
+            alert("Gagal membaca data konfigurasi di dalam XML. Format JSON salah.");
+          }
+        } else {
+          alert("File XML valid, namun tidak ditemukan script data profil desa didalamnya. Struktur widget bawaan akan digunakan.");
+          saveCurrentDataToStorage();
+          updatePreview(true);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Trigger HTML Import File Dialog
+    function triggerImportHTML() {
+      document.getElementById("import-html-file-input").click();
+    }
+
+    // Parse the uploaded HTML and extract the json configuration
+    function handleImportHTMLFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const text = e.target.result;
+
+        // Find JSON script
+        const match = text.match(/<script id=['"]profil-desa-data['"][^>]*>([\s\S]*?)<\/script>/);
+        if (match) {
+          try {
+            const data = JSON.parse(match[1].trim());
+            rawXmlTemplate = text;
+            isHtmlTemplate = true;
+            loadDataToForm(data);
+            buildDynamicPotensiLists();
+            saveCurrentDataToStorage();
+            updatePreview(true);
+            alert("Berhasil mengimpor data profil desa dari file HTML Klasik!");
+          } catch (err) {
+            alert("Gagal membaca data konfigurasi di dalam HTML. Format JSON salah.");
+          }
+        } else {
+          alert("File HTML valid, namun tidak ditemukan script data profil desa didalamnya (id='profil-desa-data').");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Export Data as Blogger XML Theme File
+    function exportXML() {
+      const data = getJsonDataFromForm();
+
+      if (!rawXmlTemplate || isHtmlTemplate) {
+        alert("Template saat ini bukan Blogger XML. Silakan impor file theme_template.xml terlebih dahulu jika ingin mengekspor dalam format Blogger XML.");
+        return;
+      }
+
+      // Inject the configuration JSON string into the XML template
+      const dataString = JSON.stringify(data, null, 2);
+
+      // Match the script block exactly as defined in the template and replace its contents
+      const scriptRegex = /(<script id='profil-desa-data' type='application\/json'>)([\s\S]*?)(<\/script>)/;
+
+      if (rawXmlTemplate.match(scriptRegex)) {
+        let updatedXml = rawXmlTemplate.replace(scriptRegex, `$1\n${dataString}\n$3`);
+
+        // Statically update contact phone, WhatsApp displays/links, and theme colors
+        updatedXml = updateStaticWhatsApp(updatedXml, data);
+        updatedXml = updateStaticColors(updatedXml, data);
+
+        // Trigger download
+        const blob = new Blob([updatedXml], { type: "text/xml" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `tema-profil-${data.namaDesa.toLowerCase().replace(/\s+/g, "-")}.xml`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } else {
+        alert("Gagal mengekspor. Script penampung data '<script id='profil-desa-data'>' tidak ditemukan di template XML.");
+      }
+    }
+
+    // Export Data as Pure HTML Classic Theme File
+    function exportHTML() {
+      const data = getJsonDataFromForm();
+
+      if (!rawXmlTemplate) {
+        alert("Template dasar belum dimuat. Silakan impor template XML atau HTML terlebih dahulu.");
+        return;
+      }
+
+      let updatedHtml;
+      if (isHtmlTemplate) {
+        updatedHtml = compileHtmlTemplate(rawXmlTemplate, data);
+      } else {
+        updatedHtml = compileBloggerXmlToHtml(rawXmlTemplate, data);
+      }
+
+      // Trigger download
+      const blob = new Blob([updatedHtml], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `profil-${data.namaDesa.toLowerCase().replace(/\s+/g, "-")}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Export Compiled HTML Code as a Text File (.txt)
+    function exportTXT() {
+      const data = getJsonDataFromForm();
+
+      if (!rawXmlTemplate) {
+        alert("Template dasar belum dimuat. Silakan impor template XML atau HTML terlebih dahulu.");
+        return;
+      }
+
+      let updatedHtml;
+      if (isHtmlTemplate) {
+        updatedHtml = compileHtmlTemplate(rawXmlTemplate, data);
+      } else {
+        updatedHtml = compileBloggerXmlToHtml(rawXmlTemplate, data);
+      }
+
+      // Trigger download as .txt
+      const blob = new Blob([updatedHtml], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `profil-${data.namaDesa.toLowerCase().replace(/\s+/g, "-")}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Copy JSON block only
+    function exportJSON() {
+      const data = getJsonDataFromForm();
+      const jsonText = JSON.stringify(data, null, 2);
+
+      navigator.clipboard.writeText(jsonText).then(() => {
+        alert("Kode data JSON berhasil disalin ke clipboard! Anda dapat menempelkannya ke Widget Blogger (Konfigurasi Data Desa).");
+      }).catch(err => {
+        alert("Gagal menyalin otomatis. Silakan salin manual.");
+      });
+    }
+
+    // Reset Editor to initial default state
+    function resetEditor() {
+      if (confirm("Apakah Anda yakin ingin mereset editor ke template default dan membersihkan memori penyimpanan lokal browser?")) {
+        localStorage.removeItem("profilDesaData");
+        localStorage.removeItem("rawTemplateText");
+        localStorage.removeItem("isHtmlTemplate");
+        location.reload();
+      }
+    }
+  </script>
+</body>
+
+</html>
